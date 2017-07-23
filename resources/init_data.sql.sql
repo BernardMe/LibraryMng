@@ -58,5 +58,5 @@ INSERT  INTO `tb_purview`(`mid`,`sysset`,`readerset`,`bookset`,`borrowback`,`sys
 INSERT  INTO `tb_parameter`(`paraid`,`cost`,`validity`) VALUES (1,45,3);
 
 -- 插入图书馆信息表数据
-insert  into `tb_library`(`libraryid`,`libraryname`,`curator`,`tel`,`address`,`email`,`url`,`createdate`,`introduce`) 
-values (1,'是','wgh','1363********','ccs','wgh717@****.com','http://','1999-05-06','是');
+INSERT  INTO `tb_library`(`libraryid`,`libraryname`,`curator`,`tel`,`address`,`email`,`url`,`createdate`,`introduce`)
+VALUES (1,'是','wgh','1363********','ccs','wgh717@****.com','http://','1999-05-06','是');
