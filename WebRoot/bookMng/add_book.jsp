@@ -1,9 +1,10 @@
 
 
-
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
+<base href="${applicationScope.basePath}">
 <title>图书馆管理系统</title>
 <link href="css/style.css" rel="stylesheet">
 </head>
@@ -12,67 +13,6 @@
 
 </script>
 <body onLoad="clockon(bgclock)">
-
-
-
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<table width="778" border="0" align="center" cellpadding="0" cellspacing="0">
-  <tr>
-    <td height="118" valign="top" background="Images/top_bg_2.gif" bgcolor="#EEEEEE"><table width="100%" height="33" border="0" cellpadding="0" cellspacing="0">
-      <tr>
-        <td width="81%" height="10"></td>
-        <td colspan="2"></td>
-      </tr>
-      <tr>
-        <td height="20">&nbsp;</td>
-        <td width="10%"><a href="#" onClick="window.location.reload();" class="word_dark">刷新页面</a></td>
-        <td width="9%"><a href="#" onClick="myclose()" class="word_dark">关闭系统</a></td>
-		<script language="javascript">
-			function myclose(){
-				if(confirm("真的要关闭当前窗口吗?")){
-					window.close();
-				}
-			}
-		</script>
-        </tr>
-    </table>
-      <table width="93%" height="79"  border="0" cellpadding="0" cellspacing="0">
-        <tr>
-          <td height="69" align="right" valign="bottom">当前登录用户：java1234</td>
-        </tr>
-    </table></td>
-  </tr>
-</table>
-
-
-
-
-
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<script src="js/onclock.js"></script>
-<script src="js/menu.js" ></script>
-<div class=menuskin id=popmenu
-      onmouseover="clearhidemenu();highlightmenu(event,'on')"
-      onmouseout="highlightmenu(event,'off');dynamichide(event)" style="Z-index:100;position:absolute;"></div>
-<table width="778"  border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
-      <tr bgcolor="#DFA40C">
-        <td width="3%" height="27">&nbsp;</td>
-        <td width="29%"><div id="bgclock" class="word_white"></div></td>
-		<script language="javascript">
-			function quit(){
-				if(confirm("真的要退出系统吗?")){
-					window.location.href="login.html";
-				}
-			}
-		</script>
-        <td width="66%" align="right" bgcolor="#B0690B" class="word_white"><a href="main.html" class="word_white">首页</a> |
-        <a  onmouseover=showmenu(event,sysmenu) onmouseout=delayhidemenu() class="word_white" style="CURSOR:hand" >系统设置</a> | <a  onmouseover=showmenu(event,readermenu) onmouseout=delayhidemenu() style="CURSOR:hand"  class="word_white">读者管理</a> | <a  onmouseover=showmenu(event,bookmenu) onmouseout=delayhidemenu() class="word_white" style="CURSOR:hand" >图书管理</a> | <a  onmouseover=showmenu(event,borrowmenu) onmouseout=delayhidemenu() class="word_white" style="CURSOR:hand">图书借还</a> | <a  onmouseover=showmenu(event,querymenu) onmouseout=delayhidemenu()  class="word_white" style="CURSOR:hand" >系统查询</a> | <a  href="pwd_Modify.html" class="word_white">更改口令</a> | <a href="#" onClick="quit()" class="word_white">退出系统</a></td>
-        <td width="2%" bgcolor="#B0690B">&nbsp;</td>
-  </tr>
-      <tr bgcolor="#DFA40C">
-        <td height="9" colspan="4" background="Images/navigation_bg_bottom.gif"></td>
-      </tr>
-</table>
 
 <table width="778"  border="0" cellspacing="0" cellpadding="0" align="center">
   <tr>
@@ -104,7 +44,9 @@
     <tr>
     <td align="left" style="padding:5px;">图书类型：</td>
     <td align="left">
-    	<input name="typeid" type="text" id="typeid" size="30">
+    	<select name="typeid" id="typeid">
+    	  <option value="-1">请选择图书类型</option>
+    	</select>
     </tr>
     <tr>
     <td align="left" style="padding:5px;">图书作者：</td>
@@ -119,13 +61,9 @@
     <tr>
     <td align="left" style="padding:5px;">国际图书编号：</td>
     <td align="left">
-    	<input name="ISBN" type="text" id="ISBN" size="30">
-    </tr>
-    
-    <tr>
-    <td align="left" style="padding:5px;">出版社名称：</td>
-    <td align="left">
-    	<input name="pubname" type="text" id="pubname" size="30">
+    	<select name="isbn" id="isbn">
+    	  <option value="-1">请选择出版社</option>
+    	</select>
     </tr>
     
     <tr>
@@ -141,7 +79,9 @@
     <tr>
     <td align="left" style="padding:5px;">所属书架：</td>
     <td align="left">
-    	<input name="bookcaseid" type="text" id="bookcaseid" size="30">
+    	<select name="bookcaseid" id="bookcaseid">
+    	   <option value="-1">请选择书架</option>
+    	</select>
     </tr>
     <tr>
     <td align="left" style="padding:5px;">上架时间：</td>
@@ -156,12 +96,6 @@
     	<input name="del" type="radio" id="del" value="0" checked/>否
     	
 	</td>
-    </tr>
-    
-     <tr>
-    <td align="left" style="padding:5px;">书籍id：</td>
-    <td align="left">
-    	<input name="boookid" type="text" id="boookid" size="30">
     </tr>
     
     <tr>
