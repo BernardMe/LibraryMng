@@ -49,8 +49,8 @@
 
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<script src="JS/onclock.JS" charset="gbk"></script>
-<script src="JS/menu.JS" charset="gbk"></script>
+<script src="js/onclock.js" charset="gbk"></script>
+<script src="js/menu.js" charset="gbk"></script>
 <div class=menuskin id=popmenu
       onmouseover="clearhidemenu();highlightmenu(event,'on')"
       onmouseout="highlightmenu(event,'off');dynamichide(event)" style="Z-index:100;position:absolute;"></div>
@@ -172,9 +172,9 @@
     
     <tr>
       <td height="65" align="left" style="padding:5px;">&nbsp;</td>
-      <td><input name="Submit" type="submit" class="btn_grey" value="保存" onClick="return checkForm(form1)">
+      <td><input type="button" name="Submit" value="保存" class="button" onclick="window.location.href = 'success.html'" />
         &nbsp;
-        <input name="Submit2" type="reset" class="btn_grey" value="取消"></td>
+        <input type="reset" name="Submit" value="取消" class="button" onclick="window.location.href = 'success.html'" /></td>
     </tr>
 </table>
 </form></td>
