@@ -8,6 +8,7 @@ function clockon(bgclock){
 	var minu=now.getMinutes();
 	var sec=now.getSeconds();
 	var week;
+
 	month=month+1;
 	if(month<10) month="0"+month;
 	if(date<10) date="0"+date;
