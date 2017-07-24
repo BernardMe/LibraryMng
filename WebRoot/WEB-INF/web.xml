@@ -50,6 +50,11 @@
         <servlet-name>AdminServlet</servlet-name>
         <servlet-class>org.logicalcobwebs.proxool.admin.servlet.AdminServlet</servlet-class>
     </servlet>
+    <!-- 配置验证图片 -->
+     <servlet>
+    <servlet-name>AuthImage</servlet-name>
+    <servlet-class>com.lbg.library.controller.AuthImage</servlet-class>
+  </servlet>
 
 
     <!-- config SERVLET mapping -->
@@ -61,5 +66,9 @@
         <servlet-name>AdminServlet</servlet-name>
         <url-pattern>/admin</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>AuthImage</servlet-name>
+    <url-pattern>/code.jpg</url-pattern>
+  </servlet-mapping>
 
 </web-app>
