@@ -88,8 +88,9 @@ a:hover {
    Header & Navigation
    ===================================================== */
 header {
-  padding-top: 120px;
+  padding-top: 90px;
   background: #EEEEEE url("../Images/top_bg.gif") 0 0 no-repeat;
+  background-position: center;
   border-bottom: 1px solid #dadada;
   -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.04);
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.04);
