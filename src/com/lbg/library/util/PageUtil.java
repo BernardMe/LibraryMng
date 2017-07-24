@@ -2,74 +2,74 @@ package com.lbg.library.util;
 
 import java.util.List;
 
+/**
+ * 分页工具类
+ * 
+ * @author Administrator
+ * 
+ */
 public class PageUtil<T> {
-	
-	//当前页
-	private int page;
-	//每页显示记录数
-	private int size;
-	//总记录数
-	private int totalSize;
-	//总页数
-	private int totalPage;
-	//查询的起始位置
-	private int start;
-	//是否有上一页
-	private boolean hasPrevious;
-	//是否有下一页
-	private boolean hasNext;
-	//上一页
-	private int prevPage;
-	//下一页
-	private int nextPage;
-	//首页
-	private int first;
-	//尾页
-	private int last;
-	
-	//查询到的结果集合,譬如student
-	private List<T> list;
-	
-	
-	public PageUtil(String page,int size,int totalSize){
-		//当前页
-		this.page = page == null || page.trim().length() == 0 ? 1 : Integer.parseInt(page);
 
-		//每页显示记录数
+	// 当前页
+	private int page;
+	// 每页显示记录数
+	private int size;
+	// 总记录数
+	private int totalSize;
+	// 总页数
+	private int totalPage;
+	// 查询的起始位置
+	private int start;
+	// 是否有上一页
+	private boolean hasPrevious;
+	// 是否有下一页
+	private boolean hasNext;
+	// 上一页
+	private int prevPage;
+	// 下一页
+	private int nextPage;
+	// 首页
+	private int first;
+	// 尾页
+	private int last;
+	// 查询到的结果集合
+	private List<T> list;
+
+	public PageUtil(String page, int size, int totalSize) {
+		// 当前页
+		this.page = page == null || page.trim().length() == 0 ? 1 : Integer.parseInt(page);
+		// 每页显示记录数
 		this.size = size;
-		//总记录数
-		this.totalSize = totalSize;
-		//总页数
-		this.totalPage = (int)Math.ceil((this.totalSize*1.0)/this.size);
-		
-		if(this.page<1){
-			this.page=1;
+		// 总记录数
+		this.totalSize = totalSize == 0 ? 1 : totalSize;
+		// 总页数
+		this.totalPage = (int) Math.ceil(this.totalSize * 1.0 / this.size);
+
+		if (this.page < 1) {
+			this.page = 1;
 		}
-		if(this.page>totalPage){
+		if (this.page > this.totalPage) {
 			this.page = totalPage;
 		}
-		
-		//查询的起始位置
-		this.start = (this.page-1)*this.size;
-		//是否有上一页
-		if(this.page>1){
-			this.hasPrevious=true;
-			//上一页
-			this.prevPage = this.page-1;
-		}
-		//是否有下一页
-		if(this.page<this.totalPage){
-			this.hasNext=true;
-			//下一页
-			this.nextPage = this.page+1;
-		}
 
-		//首页
+		// 查询的起始位置
+		this.start = (this.page - 1) * this.size;
+		if (this.page > 1) {
+			// 是否有上一页
+			this.hasPrevious = true;
+			// 上一页
+			this.prevPage = this.page - 1;
+		}
+		if (this.page < this.totalPage) {
+			// 是否有下一页
+			this.hasNext = true;
+			// 下一页
+			this.nextPage = this.page + 1;
+		}
+		// 首页
 		this.first = 1;
-		
-		//尾页
+		// 尾页
 		this.last = this.totalPage;
-		
 	}
 
 	public int getPage() {
@@ -159,7 +159,7 @@ public class PageUtil<T> {
 	public void setLast(int last) {
 		this.last = last;
 	}
-	
+
 	public List<T> getList() {
 		return list;
 	}
@@ -167,5 +167,5 @@ public class PageUtil<T> {
 	public void setList(List<T> list) {
 		this.list = list;
 	}
-	
+
 }
