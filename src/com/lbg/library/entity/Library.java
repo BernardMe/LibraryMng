@@ -1,6 +1,9 @@
 package com.lbg.library.entity;
 
 import java.sql.Date;
+/**
+ *馆长实体类
+ */
 
 public class Library {
 	private int libraryid;

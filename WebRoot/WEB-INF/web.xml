@@ -55,7 +55,12 @@
         <servlet-name>AdminServlet</servlet-name>
         <servlet-class>org.logicalcobwebs.proxool.admin.servlet.AdminServlet</servlet-class>
     </servlet>
-
+    <!-- 书卡的servlet -->
+     <servlet>
+        <servlet-name>ParameterServlet</servlet-name>
+        <servlet-class>com.lbg.library.controller.ParameterServlet</servlet-class>
+    </servlet>
+    
 
     <!-- config SERVLET mapping -->
     <servlet-mapping>
@@ -69,6 +74,10 @@
     <servlet-mapping>
         <servlet-name>AdminServlet</servlet-name>
         <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ParameterServlet</servlet-name>
+        <url-pattern>/parameter.action</url-pattern>
     </servlet-mapping>
 
 </web-app>
