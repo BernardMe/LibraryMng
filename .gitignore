@@ -29,3 +29,5 @@ HGWS_UML.png
 # IDEA files
 *.iml
 
+# web.xml
+web.xml
