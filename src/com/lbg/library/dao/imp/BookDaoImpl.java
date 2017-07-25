@@ -9,6 +9,10 @@ import com.lbg.library.entity.BookType;
 import com.lbg.library.util.PageUtil;
 
 public class BookDaoImpl extends BaseDaoImp implements BookDao {
+	
+
+	
+
 	/*************************** 对书的类型的操作 *******************************************/
 	@Override
 	public int addBookType(BookType type) {
@@ -61,9 +65,16 @@ public class BookDaoImpl extends BaseDaoImp implements BookDao {
 	}
 
 	@Override
-	public List<BookInfo> queryAllBook() {
+	public void queryAllBook(PageUtil<BookInfo> pu) {
 		String sql = "select bi.bookid,bi.bookname,bt.typename,s.shelfname,p.pubname from tb_bookinfo bi,tb_booktype bt,tb_publishing p,tb_shelf s where bi.typeid = bt.typeid and bi.isbn = p.isbn and bi.shelfid = s.shelfid";
-		return baseQuery(BookInfo.class, sql);
+		 List<BookInfo> list = baseQuery(BookInfo.class, sql);
+		 pu.setList(list);
+	}
+	
+	@Override
+	public int countBookInfo() {
+		String sql = "select count(*) from tb_bookinfo";
+		return queryCount(sql);
 	}
 
 	/********************* 国际图书编号 **************************************/
@@ -73,6 +84,8 @@ public class BookDaoImpl extends BaseDaoImp implements BookDao {
 		String sql = "select * from tb_publishing";
 		return baseQuery(BookIsbn.class, sql);
 	}
+
+	
 
 	
 

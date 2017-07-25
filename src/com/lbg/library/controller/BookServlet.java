@@ -186,11 +186,12 @@ public class BookServlet extends BaseServlet {
 	 * @throws ServletException 
 	 */
 	public void queryAllBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-		List<BookInfo> books = bs.queryAllBook();
-		if(books!=null){
-			req.setAttribute("books", books);
+		    String page = req.getParameter("page");
+		    PageUtil<BookInfo> pu = new PageUtil<>(page, 5, bs.countBookInfo());
+		    bs.queryAllBook(pu);
+			req.setAttribute("pu", pu);
 			req.getRequestDispatcher("bookMng/book.jsp").forward(req, resp);
-		}
+		
 	}
 	/*************************国际图书编号
 	 * @throws IOException *******************************************/

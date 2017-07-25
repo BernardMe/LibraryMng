@@ -62,14 +62,12 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public void queryAllBook(PageUtil<BookInfo> pu) {
-		// TODO Auto-generated method stub
-		
+		dao.queryAllBook(pu);
 	}
 
 	@Override
 	public int countBookInfo() {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.countBookInfo();
 	}
 
 	

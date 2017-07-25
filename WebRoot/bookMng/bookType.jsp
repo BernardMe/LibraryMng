@@ -115,7 +115,7 @@
                                                        size="1"/>
                                             </td>
                                             <td width="87%">
-                                                <input name="Submit23222" type="submit" id = "change" class="right-button06"
+                                                <input name="Submit23222" type="button" id = "change" class="right-button06"
                                                        value=" " onclick = "changePage();"/>
                                             </td>
                                         </tr>
