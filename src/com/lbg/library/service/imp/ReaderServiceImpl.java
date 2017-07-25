@@ -51,6 +51,15 @@ public class ReaderServiceImpl extends BaseDaoImp implements ReaderService {
 	public void getReaderList(PageUtil<Reader> pageutil) {
 		dao.getReaderList(pageutil);
 	}
+	
+	public int queryReaderCount() {
+		return dao.queryReaderCount();
+	}
+	
+
+	public boolean deleteReaderByID(int rid) {
+		return dao.deleteReaderByID(rid);
+	}
 
 	/**
 	 * 读者借阅检查实体
@@ -61,4 +70,8 @@ public class ReaderServiceImpl extends BaseDaoImp implements ReaderService {
 	public List<R4Borrow> getReaderInfo4Borrow(int rid) {
 		return dao.getReaderInfo4Borrow(rid);
 	}
+
+
+
+
 }

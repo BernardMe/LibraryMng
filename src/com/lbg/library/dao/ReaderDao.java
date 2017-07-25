@@ -54,6 +54,21 @@ public interface ReaderDao {
 	 * @param pageutil
 	 */
 	public void getReaderList(PageUtil<Reader> pageutil);
+	
+	
+	/**
+	 * 获取读者总数目
+	 * @return 读者总数
+	 */
+	public int queryReaderCount();
+	
+	
+	/**
+	 * 删除读者根据读者条形码
+	 * @param rid
+	 * @return
+	 */	
+	public boolean deleteReaderByID(int rid);
 
 
 	/**

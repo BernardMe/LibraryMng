@@ -59,6 +59,23 @@ public class ReaderDaoImpl extends BaseDaoImp implements ReaderDao {
 		pageutil.setList(baseQuery(Reader.class, sql,pageutil.getStart(),pageutil.getSize()));
 
 	}
+	
+	
+	public int queryReaderCount() {
+		String sql = "select count(*) from tb_reader";
+		return queryCount(sql);
+	}
+	
+	
+	public boolean deleteReaderByID(int rid) {
+		
+		String sql = "delete from tb_reader where rid=?";
+		if (baseUpdate(sql, rid)>0){
+			return true;
+		}else{
+			return false;
+		}
+	}
 
 	/**
 	 * 读者借阅检查实体
@@ -75,5 +92,8 @@ public class ReaderDaoImpl extends BaseDaoImp implements ReaderDao {
 		//返回查询结果集
 		return baseQuery(R4Borrow.class, sql, rid);
 	}
+
+
+
 
 }

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.lbg.library.entity.Reader;
 import com.lbg.library.entity.ReaderType;
 import com.lbg.library.service.ReaderService;
 import com.lbg.library.service.imp.ReaderServiceImpl;
@@ -21,7 +22,7 @@ public class ReaderServlet extends BaseServlet {
 	
 	public void getReaderTypeList(HttpServletRequest req ,HttpServletResponse resp) throws ServletException, IOException{
 		String page = req.getParameter("page");
-		PageUtil<ReaderType> pu = new PageUtil<ReaderType>(page,10,rs.queryReaderTypeCount());
+		PageUtil<ReaderType> pu = new PageUtil<ReaderType>(page,5,rs.queryReaderTypeCount());
 		rs.getReaderTypeList(pu);
 		req.setAttribute("pu", pu);
 		
@@ -74,6 +75,29 @@ public class ReaderServlet extends BaseServlet {
 		if (rs.updateReaderType(rt)) {
 			resp.getWriter().print("success");
 		} else {
+			resp.getWriter().print("fail");
+		}
+		
+	}
+	
+	
+	public void getReaderList(HttpServletRequest req ,HttpServletResponse resp) throws ServletException, IOException{
+		String page = req.getParameter("page");
+		PageUtil<Reader> pu = new PageUtil<Reader>(page,5,rs.queryReaderCount());
+		rs.getReaderList(pu);
+		req.setAttribute("pu", pu);
+		
+		req.getRequestDispatcher("/readerMng/reader.jsp").forward(req, resp);
+		return;
+	}
+	
+	
+	public void deleteReaderByID(HttpServletRequest req ,HttpServletResponse resp) throws IOException{
+		
+		int rid = Integer.parseInt(req.getParameter("rid"));
+		if(rs.deleteReaderByID(rid)){
+			resp.getWriter().print("success");
+		}else{
 			resp.getWriter().print("fail");
 		}
 		
