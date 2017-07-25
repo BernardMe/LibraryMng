@@ -8,14 +8,14 @@ package com.lbg.library.entity;
 
 public class ReaderType {
 	
-	private int rtypeid;
+	private byte rtypeid;
 	private String rtypename;
-	private int count;
+	private byte count;
 	
-	public int getRtypeid() {
+	public byte getRtypeid() {
 		return rtypeid;
 	}
-	public void setRtypeid(int rtypeid) {
+	public void setRtypeid(byte rtypeid) {
 		this.rtypeid = rtypeid;
 	}
 	public String getRtypename() {
@@ -24,11 +24,11 @@ public class ReaderType {
 	public void setRtypename(String rtypename) {
 		this.rtypename = rtypename;
 	}
-	public int getCount() {
+	public byte getCount() {
 		return count;
 	}
-	public void setCount(int count) {
+	public void setCount(byte count) {
 		this.count = count;
-	}
+	}	
 
 }
