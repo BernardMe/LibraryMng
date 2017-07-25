@@ -2,9 +2,12 @@ package com.lbg.library.dao.imp;
 
 
 import com.lbg.library.dao.ReaderDao;
+import com.lbg.library.entity.R4Borrow;
 import com.lbg.library.entity.Reader;
 import com.lbg.library.entity.ReaderType;
 import com.lbg.library.util.PageUtil;
+
+import java.util.List;
 
 /**
  * @author zmw
@@ -55,6 +58,22 @@ public class ReaderDaoImpl extends BaseDaoImp implements ReaderDao {
 		String sql = "select r.*,rt.rtypename from tb_reader r,tb_readertype rt where r.rtypeid=rt.rtypeid limit ?,?";	
 		pageutil.setList(baseQuery(Reader.class, sql,pageutil.getStart(),pageutil.getSize()));
 
+	}
+
+	/**
+	 * 读者借阅检查实体
+	 * @return list
+	 * @author Bernard
+	 */
+	@Override
+	public List<R4Borrow> getReaderInfo4Borrow(int rid) {
+		//定义SQL
+		String sql = "SELECT r.rid, r.rname, r.gender, r.papertype, r.paperno, t.rtypename, t.count" +
+				" FROM tb_reader r, tb_readertype t" +
+				" WHERE r.rtypeid = t.rtypeid AND r.rid = ?";
+
+		//返回查询结果集
+		return baseQuery(R4Borrow.class, sql, rid);
 	}
 
 }
