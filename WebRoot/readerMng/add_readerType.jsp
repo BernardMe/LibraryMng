@@ -13,40 +13,7 @@
 <script language="javascript">
 
 </script>
-<body onLoad="clockon(bgclock)">
-
-
-
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<table width="778" border="0" align="center" cellpadding="0" cellspacing="0">
-  <tr>
-    <td height="118" valign="top" background="Images/top_bg_2.gif" bgcolor="#EEEEEE"><table width="100%" height="33" border="0" cellpadding="0" cellspacing="0">
-      <tr>
-        <td width="81%" height="10"></td>
-        <td colspan="2"></td>
-      </tr>
-
-    </table>
-      <table width="93%" height="79"  border="0" cellpadding="0" cellspacing="0">
-        <tr>
-          <td height="69" align="right" valign="bottom">当前登录用户：java1234</td>
-        </tr>
-    </table></td>
-  </tr>
-</table>
-
-
-<script src="js/onclock.js" ></script>
-<script src="js/menu.js" ></script>
-<div class=menuskin id=popmenu
-      onmouseover="clearhidemenu();highlightmenu(event,'on')"
-      onmouseout="highlightmenu(event,'off');dynamichide(event)" style="Z-index:100;position:absolute;"></div>
-<table width="778"  border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
-
-      <tr bgcolor="#DFA40C">
-        <td height="9" colspan="4" background="Images/navigation_bg_bottom.gif"></td>
-      </tr>
-</table>
+<body>
 
 <table width="778"  border="0" cellspacing="0" cellpadding="0" align="center">
   <tr>

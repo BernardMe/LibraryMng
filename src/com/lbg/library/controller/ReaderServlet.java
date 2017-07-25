@@ -28,7 +28,7 @@ public class ReaderServlet extends BaseServlet {
 		//Gson gson = new Gson();
 		//System.out.println(gson.toJson(pu));
 		
-		req.getRequestDispatcher("/readerType.jsp").forward(req, resp);
+		req.getRequestDispatcher("/readerMng/readerType.jsp").forward(req, resp);
 		return;
 	}
 	
@@ -41,11 +41,11 @@ public class ReaderServlet extends BaseServlet {
 		
 		if (rs.addReaderType(rt)) {
 			// 添加成功
-			req.getRequestDispatcher("/success.jsp").forward(req, resp);
+			req.getRequestDispatcher("/readerMng/success.jsp").forward(req, resp);
 			return;
 		} else {
 			// 添加失败
-			req.getRequestDispatcher("/error.jsp").forward(req, resp);
+			req.getRequestDispatcher("/readerMng/error.jsp").forward(req, resp);
 			return;
 		}
 	}
