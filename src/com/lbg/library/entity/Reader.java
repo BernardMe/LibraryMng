@@ -23,25 +23,12 @@ public class Reader {
 	private String email;
 	private Date createdate;
 	private String remark;
-	private int rtypeid;
+	private byte rtypeid;
 	private String operator;
 	//读者类型
 	private String rtypename;
-	private int count;
+	private byte count;
 	
-	
-	public String getRtypename() {
-		return rtypename;
-	}
-	public void setRtypename(String rtypename) {
-		this.rtypename = rtypename;
-	}
-	public int getCount() {
-		return count;
-	}
-	public void setCount(int count) {
-		this.count = count;
-	}
 	public int getRid() {
 		return rid;
 	}
@@ -54,7 +41,6 @@ public class Reader {
 	public void setRname(String rname) {
 		this.rname = rname;
 	}
-		
 	public byte getGender() {
 		return gender;
 	}
@@ -109,10 +95,10 @@ public class Reader {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	public int getRtypeid() {
+	public byte getRtypeid() {
 		return rtypeid;
 	}
-	public void setRtypeid(int rtypeid) {
+	public void setRtypeid(byte rtypeid) {
 		this.rtypeid = rtypeid;
 	}
 	public String getOperator() {
@@ -121,6 +107,17 @@ public class Reader {
 	public void setOperator(String operator) {
 		this.operator = operator;
 	}
-	
-
+	public String getRtypename() {
+		return rtypename;
+	}
+	public void setRtypename(String rtypename) {
+		this.rtypename = rtypename;
+	}
+	public byte getCount() {
+		return count;
+	}
+	public void setCount(byte count) {
+		this.count = count;
+	}
+		
 }
