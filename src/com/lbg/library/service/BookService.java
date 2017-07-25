@@ -1,8 +1,13 @@
 package com.lbg.library.service;
 
+import java.util.List;
+
+import com.lbg.library.entity.BookInfo;
+import com.lbg.library.entity.BookIsbn;
 import com.lbg.library.entity.BookType;
 
 public interface BookService {
+	/******************对书的类型的操作*****************************************/
 	/**
 	 * 增加图书类型
 	 * @param type
@@ -23,5 +28,35 @@ public interface BookService {
 	 * @return
 	 */
 	int deleteBookType(int typeid);
+	/**
+	 * 查询所有的图书类型
+	 * @return
+	 */
+	List<BookType> queryAllBookType();
+	
+/****************************对书的操作**********************************************/
+	/**
+	 * 增加书
+	 * @param bookInfo
+	 * @return
+	 */
+	int addBook(BookInfo bookInfo);
+	/**
+	 * 查询所有的图书
+	 * @return
+	 */
+	List<BookInfo> queryAllBook();
+	/**
+	 * 删除书
+	 * @param bookid
+	 * @return
+	 */
+	int deleteBook(int bookid);
+	/*******************国际图书编号********************************/
+	/**
+	 * 查询所有的出版社
+	 * @return
+	 */
+	List<BookIsbn> queryAllIsbn();
 
 }

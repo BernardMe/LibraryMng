@@ -29,7 +29,9 @@
   <tr>
     <td width="84%">&nbsp;      </td>
 </tr>
-</table>  <form name="form1" method="post" action="manager.do?action=modifypwd">
+</table> 
+ <form name="form1" method="post" action="book.action">
+ <input type="hidden" name = "m" value = "addBookType" />
   <table width="47%"  border="0" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF" bordercolordark="#D2E3E6" bordercolorlight="#FFFFFF">
     <tr align="center">
     
@@ -46,9 +48,9 @@
     
     <tr>
       <td height="65" align="left" style="padding:5px;">&nbsp;</td>
-      <td><input type="button" name="Submit" value="保存" class="button" onclick="window.location.href = 'success.html'" />
+      <td><input type="submit" name="Submit" value="保存" class="button" />
         &nbsp;
-        <input type="reset" name="Submit" value="取消" class="button" onclick="window.location.href = 'success.html'" /></td>
+        <input type="reset" name="Submit" value="取消" class="button"/></td>
     </tr>
 </table>
 </form></td>

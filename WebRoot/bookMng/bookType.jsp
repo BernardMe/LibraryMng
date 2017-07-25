@@ -1,8 +1,26 @@
-<html>
 
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<html>
 <head>
     <title>图书馆管理系统</title>
-    <link href="../css/style.css" rel="stylesheet">
+    <base href="${applicationScope.basePath}">
+    <link href="css/style.css" rel="stylesheet">
+    <script src = "js/jquery.min.js"></script>
+    <script>
+        //点击删除操作
+        function del(typeid){
+        	if(window.confirm("确认删除吗？")){
+        		$.get("book.action",{"m":"deleteBookType","typeid":typeid},function(data){
+        			if(data == "success"){
+        				alert("删除成功");
+        			}else{
+        				alert("删除失败");
+        			}
+        		});
+        	}
+        }
+    </script>
 </head>
 <body onLoad="clockon(bgclock)">
 
@@ -24,7 +42,7 @@
                                         <tr>
                                             <td width="82%">&nbsp;      </td>
                                             <td width="18%" align="right">
-                                                <a href="add_bookType.jsp">添加图书类型信息</a></td>
+                                                <a href="bookMng/add_bookType.jsp">添加图书类型信息</a></td>
                                         </tr>
                                     </table>
                                     <table width="91%" border="1" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF"
@@ -35,34 +53,16 @@
                                             <td width="16%" bgcolor="#F9D16B">修改</td>
                                             <td width="14%" bgcolor="#F9D16B">删除</td>
                                         </tr>
-
+                                        <c:forEach items="${list}" var = "list">
+      
                                         <tr>
-                                            <td style="padding:5px;">计算机类</td>
-                                            <td style="padding:5px;">30</td>
-                                            <td align="center"><a href="#"
-                                                                  onClick="window.open('bookType.do?action=bookTypeModifyQuery&ID=1','','width=292,height=175')">修改</a>
+                                            <td style="padding:5px;">${list.typename }</td>
+                                            <td style="padding:5px;">${list.days}</td>
+                                            <td align="center" <a href=" ">修改</a>
                                             </td>
-                                            <td align="center"><a href="bookType.do?action=bookTypeDel&ID=1">删除</a></td>
+                                            <td align="center"><a href="javascript:void(0);" onclick = "del('${list.typeid}');">删除</a></td>
                                         </tr>
-
-                                        <tr>
-                                            <td style="padding:5px;">文学类</td>
-                                            <td style="padding:5px;">35</td>
-                                            <td align="center"><a href="#"
-                                                                  onClick="window.open('bookType.do?action=bookTypeModifyQuery&ID=3','','width=292,height=175')">修改</a>
-                                            </td>
-                                            <td align="center"><a href="bookType.do?action=bookTypeDel&ID=3">删除</a></td>
-                                        </tr>
-
-                                        <tr>
-                                            <td style="padding:5px;">建筑类</td>
-                                            <td style="padding:5px;">20</td>
-                                            <td align="center"><a href="#"
-                                                                  onClick="window.open('bookType.do?action=bookTypeModifyQuery&ID=4','','width=292,height=175')">修改</a>
-                                            </td>
-                                            <td align="center"><a href="bookType.do?action=bookTypeDel&ID=4">删除</a></td>
-                                        </tr>
-
+                                        </c:forEach>
                                     </table>
                                 </td>
                             </tr>

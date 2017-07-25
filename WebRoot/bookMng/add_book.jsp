@@ -1,5 +1,3 @@
-
-
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -8,8 +6,29 @@
 <title>图书馆管理系统</title>
 <link href="css/style.css" rel="stylesheet">
 </head>
+<script src = "js/jquery.min.js"></script>
 <script language="javascript">
-
+//获取书的类型
+$(function(){
+	$.getJSON("book.action",{"m":"queryAllType"},function(data){
+		for(var i = 0; i < data.length;i++){
+			$("#typeid").append(new Option(data[i].typename, data[i].typeid));
+		}
+	});
+	
+	//获取国际图书编号
+	$.getJSON("book.action",{"m":"queryAllIsbn"},function(data){
+		for(var i = 0; i < data.length;i++){
+			$("#isbn").append(new Option(data[i].pubname, data[i].isbn));
+		}
+	});
+	//获取书架
+	$.getJSON("book.action",{"m":"query4shelf"},function(data){
+		for(var i = 0; i < data.length;i++){
+			$("#bookcaseid").append(new Option(data[i].shelfid, data[i].shelfname));
+		}
+	});
+});
 
 </script>
 <body onLoad="clockon(bgclock)">
@@ -28,7 +47,8 @@
   <tr>
     <td width="84%">&nbsp;      </td>
 </tr>
-</table>  <form name="form1" method="post" action="manager.do?action=modifypwd">
+</table>  <form name="form1" method="post" action="book.action">
+<input type="hidden" name="m" value = "addBook" />
   <table width="47%"  border="0" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF" bordercolordark="#D2E3E6" bordercolorlight="#FFFFFF">
   <tr align="center">
     <td width="27%" align="left" style="padding:5px;">条形码：</td>
@@ -106,9 +126,9 @@
     
     <tr>
       <td height="65" align="left" style="padding:5px;">&nbsp;</td>
-      <td><input type="button" name="Submit" value="保存" class="button" onclick="window.location.href = 'success.html'" />
+      <td><input type="submit" name="Submit" value="保存" class="button" />
         &nbsp;
-        <input type="reset" name="Submit" value="取消" class="button" onclick="window.location.href = 'success.html'" /></td>
+        <input type="reset" name="Submit" value="取消" class="button"/></td>
     </tr>
 </table>
 </form></td>

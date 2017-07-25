@@ -1,8 +1,25 @@
-<html>
 
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<html>
 <head>
     <title>图书馆管理系统</title>
-    <link href="../css/style.css" rel="stylesheet">
+    <base href="${applicationScope.basePath}">
+    <link href="css/style.css" rel="stylesheet">
+    <script src = "js/jquery.min.js"></script>
+    <script>
+        //删除图书
+        function del(bookid){
+        	$.get("book.action",{"m":"deleteBook","bookid":bookid},function(data){
+        		if(data == "success"){
+        			alert("删除成功");
+        			location = "book.action?m=queryAllBook";
+        		}else{
+        			alert("删除失败");
+        		}
+        	});
+        }
+    </script>
 </head>
 <body onLoad="clockon(bgclock)">
 
@@ -24,7 +41,7 @@
                                         <tr>
                                             <td width="87%">&nbsp;      </td>
                                             <td width="13%">
-                                                <a href="add_book.jsp">添加图书信息</a></td>
+                                                <a href="bookMng/add_book.jsp">添加图书信息</a></td>
                                         </tr>
                                     </table>
                                     <table width="98%" border="1" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF"
@@ -38,43 +55,20 @@
                                             <td width="9%" bgcolor="#F9D16B">修改</td>
                                             <td width="5%" bgcolor="#F9D16B">删除</td>
                                         </tr>
+                                        <c:forEach items="${books}" var = "books">
 
                                         <tr>
-                                            <td style="padding:5px;">&nbsp;9787302047230</td>
+                                            <td style="padding:5px;">&nbsp;${books.bookid}</td>
                                             <td style="padding:5px;"><a
-                                                    href="book.do?action=bookDetail&ID=1">Java学习指南</a></td>
-                                            <td style="padding:5px;">&nbsp;计算机类</td>
-                                            <td style="padding:5px;">&nbsp;电子工业出版社</td>
-                                            <td style="padding:5px;">&nbsp;A架</td>
+                                                    href="book.do?action=bookDetail&ID=1">${books.bookname}</a></td>
+                                            <td style="padding:5px;">&nbsp;${books.typename}</td>
+                                            <td style="padding:5px;">&nbsp;${books.pubname}</td>
+                                            <td style="padding:5px;">&nbsp;${books.shelfname }</td>
 
-                                            <td align="center"><a href="book.do?action=bookModifyQuery&ID=1">修改</a></td>
-                                            <td align="center"><a href="book.do?action=bookDel&ID=1">删除</a></td>
+                                            <td align="center"><a href="">修改</a></td>
+                                            <td align="center"><a href="javascript:void(0);" onclick = "del('${books.bookid}');">删除</a></td>
                                         </tr>
-
-                                        <tr>
-                                            <td style="padding:5px;">&nbsp;001</td>
-                                            <td style="padding:5px;"><a href="book.do?action=bookDetail&ID=6">建筑测试</a>
-                                            </td>
-                                            <td style="padding:5px;">&nbsp;建筑类</td>
-                                            <td style="padding:5px;">&nbsp;电子工业出版社</td>
-                                            <td style="padding:5px;">&nbsp;B架</td>
-
-                                            <td align="center"><a href="book.do?action=bookModifyQuery&ID=6">修改</a></td>
-                                            <td align="center"><a href="book.do?action=bookDel&ID=6">删除</a></td>
-                                        </tr>
-
-                                        <tr>
-                                            <td style="padding:5px;">&nbsp;9787115157690</td>
-                                            <td style="padding:5px;"><a href="book.do?action=bookDetail&ID=3">JSP啊</a>
-                                            </td>
-                                            <td style="padding:5px;">&nbsp;计算机类</td>
-                                            <td style="padding:5px;">&nbsp;清华大学出版社</td>
-                                            <td style="padding:5px;">&nbsp;A架</td>
-
-                                            <td align="center"><a href="book.do?action=bookModifyQuery&ID=3">修改</a></td>
-                                            <td align="center"><a href="book.do?action=bookDel&ID=3">删除</a></td>
-                                        </tr>
-
+                                        </c:forEach>
                                     </table>
                                 </td>
                             </tr>
