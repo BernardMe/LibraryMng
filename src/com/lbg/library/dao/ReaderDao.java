@@ -69,6 +69,19 @@ public interface ReaderDao {
 	 * @return
 	 */	
 	public boolean deleteReaderByID(int rid);
+	
+	/**
+	 * 增加读者
+	 * @param reader
+	 * @return
+	 */
+	public boolean addReader(Reader reader);
+	
+	/**
+	 * 查询所有的读者类型列表
+	 * @return
+	 */
+	public List<ReaderType> queryAll();
 
 
 	/**

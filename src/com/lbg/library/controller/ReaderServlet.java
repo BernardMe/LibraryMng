@@ -2,6 +2,8 @@
 package com.lbg.library.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -101,6 +103,43 @@ public class ReaderServlet extends BaseServlet {
 			resp.getWriter().print("fail");
 		}
 		
+	}
+	
+	
+	public void addReader(HttpServletRequest req ,HttpServletResponse resp) throws ServletException, IOException{
+		Reader r = new Reader();
+		
+		r.setRname(req.getParameter("rname"));
+		r.setGender(Byte.parseByte(req.getParameter("gender")));
+		r.setVocation(req.getParameter("vocation"));
+		r.setBirthday(Date.valueOf(req.getParameter("birthday")));
+		r.setPapertype(req.getParameter("papertype"));
+		r.setPaperno(req.getParameter("paperno"));
+		r.setTel(req.getParameter("tel"));
+		r.setEmail(req.getParameter("email"));
+		r.setCreatedate(Date.valueOf(req.getParameter("createdate")));
+		r.setRemark(req.getParameter("remark"));
+		r.setRtypeid(Byte.parseByte(req.getParameter("rtypeid")));
+		//根据当前登录的用户名设置
+		r.setOperator("zmw");
+		
+		
+		if (rs.addReader(r)) {
+			// 添加成功
+			req.getRequestDispatcher("/readerMng/success.jsp").forward(req, resp);
+			return;
+		} else {
+			// 添加失败
+			req.getRequestDispatcher("/readerMng/error.jsp").forward(req, resp);
+			return;
+		}
+	}
+	
+	
+	public void queryReaderType4Ajax(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		List<ReaderType> list = rs.queryAll();
+		Gson gson = new Gson();
+		resp.getWriter().print(gson.toJson(list));
 	}
 
 }

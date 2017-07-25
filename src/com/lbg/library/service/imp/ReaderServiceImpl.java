@@ -60,6 +60,14 @@ public class ReaderServiceImpl extends BaseDaoImp implements ReaderService {
 	public boolean deleteReaderByID(int rid) {
 		return dao.deleteReaderByID(rid);
 	}
+	
+	public boolean addReader(Reader reader) {
+		return dao.addReader(reader);
+	}
+	
+	public List<ReaderType> queryAll() {
+		return dao.queryAll();
+	}
 
 	/**
 	 * 读者借阅检查实体

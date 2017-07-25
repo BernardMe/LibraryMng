@@ -60,7 +60,7 @@
                                         <tr>
                                             <td width="87%">&nbsp;      </td>
                                             <td width="13%">
-                                                <a href="readerMng/add_reader.html">添加读者信息</a></td>
+                                                <a href="readerMng/add_reader.jsp">添加读者信息</a></td>
                                         </tr>
                                     </table>
                                     <table width="95%" border="1" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF"

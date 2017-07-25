@@ -30,6 +30,10 @@ public interface ReaderService {
 	public int queryReaderCount();
 	
 	public boolean deleteReaderByID(int rid);
+	
+	public boolean addReader(Reader reader);
+	
+	public List<ReaderType> queryAll();
 
 	/**
 	 * 读者借阅检查实体

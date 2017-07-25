@@ -76,6 +76,24 @@ public class ReaderDaoImpl extends BaseDaoImp implements ReaderDao {
 			return false;
 		}
 	}
+	
+	
+	public boolean addReader(Reader reader) {
+		
+		String sql = "insert into tb_reader values(0,?,?,?,?,?,?,?,?,?,?,?,?)";
+		if(baseUpdate(sql,reader.getRname(),reader.getGender(),reader.getVocation(),reader.getBirthday(),reader.getPapertype(),reader.getPaperno(),reader.getTel(),reader.getEmail(),reader.getCreatedate(),reader.getRemark(),reader.getRtypeid(),reader.getOperator())>0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	public List<ReaderType> queryAll() {
+		
+		String sql = "select * from t_readertype";
+		return baseQuery(ReaderType.class, sql);
+
+	}
 
 	/**
 	 * 读者借阅检查实体
@@ -92,8 +110,6 @@ public class ReaderDaoImpl extends BaseDaoImp implements ReaderDao {
 		//返回查询结果集
 		return baseQuery(R4Borrow.class, sql, rid);
 	}
-
-
 
 
 }
