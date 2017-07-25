@@ -31,3 +31,6 @@ HGWS_UML.png
 
 # web.xml
 web.xml
+
+# ignore CharsetFilter
+CharsetFilter.java
