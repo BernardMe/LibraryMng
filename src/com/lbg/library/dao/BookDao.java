@@ -34,6 +34,16 @@ public interface BookDao {
 	 * @return
 	 */
 	void queryAllBookType(PageUtil<BookType> pu);
+	/**
+	 * 查询书的总数
+	 * @return
+	 */
+	int countBookType();
+	/**
+	 * 用于ajax
+	 * @return
+	 */
+	List<BookType> query4BookType();
 	
 	/************************对书的信息的操作***********************************************/
 	/**
@@ -52,7 +62,12 @@ public interface BookDao {
 	 * 查询所有的图书
 	 * @return
 	 */
-	List<BookInfo> queryAllBook();
+	void queryAllBook(PageUtil<BookInfo> pu);
+	/**
+	 * 查询书的总数
+	 * @return
+	 */
+	int countBookInfo();
 	/*********************************国际图书编号*******************************************************/
 	/**
 	 * 查询所有的出版社

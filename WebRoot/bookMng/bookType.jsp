@@ -20,6 +20,11 @@
         		});
         	}
         }
+        //分页
+        function changePage(){
+        	var page = $("#btn").val();
+        	location = "book.action?m=queryAllBookType&page="+page;
+        }
     </script>
 </head>
 <body onLoad="clockon(bgclock)">
@@ -53,7 +58,7 @@
                                             <td width="16%" bgcolor="#F9D16B">修改</td>
                                             <td width="14%" bgcolor="#F9D16B">删除</td>
                                         </tr>
-                                        <c:forEach items="${list}" var = "list">
+                                        <c:forEach items="${pu.list}" var = "list">
       
                                         <tr>
                                             <td style="padding:5px;">${list.typename }</td>
@@ -79,24 +84,39 @@
                         <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0"
                                class="right-font08">
                             <tr>
-                                <td width="50%">共 <span class="right-text09">5</span> 页 | 第 <span
-                                        class="right-text09">1</span> 页
+                                <td width="50%">共 <span class="right-text09">${pu.totalPage}</span> 页 | 第 <span
+                                        class="right-text09">${pu.page}</span> 页
                                 </td>
-                                <td width="49%" align="right">[<a href="#" class="right-font08">首页</a> | <a href="#"
-                                                                                                            class="right-font08">上一页</a>
-                                    | <a href="#" class="right-font08">下一页</a> | <a href="#" class="right-font08">末页</a>]
+                                <td width="49%" align="right">[<a href="book.action?m=queryAllBookType&page=1" class="right-font08">首页</a> | 
+                                <c:choose>
+                                <c:when test="${pu.hasPrevious}">
+                                     <a href="book.action?m=queryAllBookType&page=${pu.prevPage}" class="right-font08">上一页</a>|
+                                </c:when>
+                                <c:otherwise>
+                                    <font color = "gray">上一页</font>
+                                </c:otherwise>
+                                </c:choose>
+                                 <c:choose>
+                                <c:when test="${pu.hasNext}">
+                                     <a href="book.action?m=queryAllBookType&page=${pu.nextPage}" class="right-font08">下一页</a>|
+                                </c:when>
+                                <c:otherwise>
+                                    <font color = "gray">下一页</font>
+                                </c:otherwise>
+                                </c:choose>
+                                  <a href="book.action?m=queryAllBookType&page=${pu.last}" class="right-font08">末页</a>]
                                     转至：
                                 </td>
                                 <td width="1%">
                                     <table width="20" border="0" cellspacing="0" cellpadding="0">
                                         <tr>
                                             <td width="1%">
-                                                <input name="textfield3" type="text" class="right-textfield03"
+                                                <input name="textfield3" id = "btn" type="text" class="right-textfield03"
                                                        size="1"/>
                                             </td>
                                             <td width="87%">
-                                                <input name="Submit23222" type="submit" class="right-button06"
-                                                       value=" "/>
+                                                <input name="Submit23222" type="submit" id = "change" class="right-button06"
+                                                       value=" " onclick = "changePage();"/>
                                             </td>
                                         </tr>
                                     </table>

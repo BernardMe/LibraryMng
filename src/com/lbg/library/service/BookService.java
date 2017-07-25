@@ -5,6 +5,7 @@ import java.util.List;
 import com.lbg.library.entity.BookInfo;
 import com.lbg.library.entity.BookIsbn;
 import com.lbg.library.entity.BookType;
+import com.lbg.library.util.PageUtil;
 
 public interface BookService {
 	/******************对书的类型的操作*****************************************/
@@ -32,7 +33,18 @@ public interface BookService {
 	 * 查询所有的图书类型
 	 * @return
 	 */
-	List<BookType> queryAllBookType();
+	void queryAllBookType(PageUtil<BookType> pu);
+	/**
+	 * 查询书的总数
+	 * @return
+	 */
+	int countBookType();
+	/**
+	 * 用于ajax
+	 * @return
+	 */
+	List<BookType> query4BookType();
+	
 	
 /****************************对书的操作**********************************************/
 	/**
@@ -45,7 +57,12 @@ public interface BookService {
 	 * 查询所有的图书
 	 * @return
 	 */
-	List<BookInfo> queryAllBook();
+	void queryAllBook(PageUtil<BookInfo> pu);
+	/**
+	 * 查询书的总数
+	 * @return
+	 */
+	int countBookInfo();
 	/**
 	 * 删除书
 	 * @param bookid

@@ -14,6 +14,7 @@ import com.lbg.library.entity.BookIsbn;
 import com.lbg.library.entity.BookType;
 import com.lbg.library.service.BookService;
 import com.lbg.library.service.imp.BookServiceImpl;
+import com.lbg.library.util.PageUtil;
 
 public class BookServlet extends BaseServlet {
 	// 创建Bookservice对象
@@ -94,11 +95,11 @@ public class BookServlet extends BaseServlet {
 	 * @throws ServletException 
 	 */
 	public void queryAllBookType(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-		List<BookType> list = bs.queryAllBookType();
-		if(list != null){
-			req.setAttribute("list",list);
-			req.getRequestDispatcher("bookMng/bookType.jsp").forward(req, resp);
-		}
+		String page = req.getParameter("page");
+		PageUtil<BookType> pu = new PageUtil<>(page,5,bs.countBookType());
+		bs.queryAllBookType(pu);
+		req.setAttribute("pu", pu);
+		req.getRequestDispatcher("bookMng/bookType.jsp").forward(req, resp);
 	}
 	/**
 	 * 以json格式传到前台
@@ -108,10 +109,11 @@ public class BookServlet extends BaseServlet {
 	 * @throws ServletException 
 	 */
 	public void queryAllType(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException{
-		List<BookType> list = bs.queryAllBookType();
+		List<BookType> list = bs.query4BookType();
 		Gson gson = new Gson();
 		resp.getWriter().print(gson.toJson(list));
 	}
+	
 
 	/********************* 对书的操作 ****************************************/
 	/**

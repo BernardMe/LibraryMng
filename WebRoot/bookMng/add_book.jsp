@@ -25,7 +25,7 @@ $(function(){
 	//获取书架
 	$.getJSON("book.action",{"m":"query4shelf"},function(data){
 		for(var i = 0; i < data.length;i++){
-			$("#bookcaseid").append(new Option(data[i].shelfid, data[i].shelfname));
+			$("#bookcaseid").append(new Option(data[i].shelfname, data[i].shelfid));
 		}
 	});
 });
