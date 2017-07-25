@@ -192,7 +192,7 @@ var bookmenu='\
 </table>'
 var borrowmenu='\
 <table width=60>\
-<tr><td id=Borrow onMouseOver=overbg(Borrow) onMouseOut=outbg(Borrow)><a href="bookBorrow.html">图书借阅</a></td></tr>\
+<tr><td id=Borrow onMouseOver=overbg(Borrow) onMouseOut=outbg(Borrow)><a href="bookBorrow.jsp">图书借阅</a></td></tr>\
 <tr><td id=renew onMouseOver=overbg(renew) onMouseOut=outbg(renew)><a href=bookRenew.html>图书续借</a></td></tr>\
 <tr><td id=giveback onMouseOver=overbg(giveback) onMouseOut=outbg(giveback)><a href=bookBack.html>图书归还</a></td></tr>\
 </table>'

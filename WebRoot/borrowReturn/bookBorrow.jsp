@@ -1,9 +1,15 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 
 <head>
-    <title>图书馆管理系统</title>
-    <link href="../css/style.css" rel="stylesheet">
-    <script language="javascript">
+    <base href="${applicationScope.basePath }">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>图书借阅</title>
+    <link href="css/style.css" rel="stylesheet">
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript">
         function checkreader(form) {
             if (form.barcode.value == "") {
                 alert("请输入读者条形码!");
@@ -30,6 +36,24 @@
             }
             form.submit();
         }
+
+        /**
+         * 读者借阅检查
+         */
+        function getReaderInfo4Borrow() {
+            var rid = $("#rid").val();
+            $.get("borrow.action", {"m": "getReaderInfo4Borrow", "rid": rid}, function (data) {
+                data = JSON.parse(data);
+                console.info(data[0]);
+
+                $("#rname").val(data[0].rname);
+                $("#gender").val(data[0].gender);
+                $("#rtypename").val(data[0].rtypename);
+                $("#papertype").val(data[0].papertype);
+                $("#paperno").val(data[0].paperno);
+                $("#count").val(data[0].count);
+            });
+        }
     </script>
 </head>
 <body onLoad="clockon(bgclock)">
@@ -48,10 +72,10 @@
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                             <form name="form1" method="post" action="borrow.do?action=bookborrow">
                                 <tr>
-                                    <td height="47" background="../Images/borrowBackRenew.gif">&nbsp;</td>
+                                    <td height="47" background="Images/borrowBackRenew.gif">&nbsp;</td>
                                 </tr>
                                 <tr>
-                                    <td height="72" align="center" valign="top" background="../Images/main_booksort_1.gif"
+                                    <td height="72" align="center" valign="top" background="Images/main_booksort_1.gif"
                                         bgcolor="#F8BF73">
                                         <table width="96%" border="0" cellpadding="1" cellspacing="0"
                                                bordercolor="#FFFFFF" bgcolor="#F8BF73">
@@ -68,15 +92,15 @@
                                                                     <tr>
                                                                         <td width="24%" height="18"
                                                                             style="padding-left:7px;padding-top:7px;">
-                                                                            <img src="../Images/reader_checkbg.jpg"
+                                                                            <img src="Images/reader_checkbg.jpg"
                                                                                  width="142" height="18"></td>
                                                                         <td width="76%" style="padding-top:7px;">读者条形码：
                                                                             <input name="barcode" type="text"
-                                                                                   id="barcode" value="" size="24">
+                                                                                   id="rid" value="" size="24">
                                                                             &nbsp;
                                                                             <input type="button" name="Submit"
                                                                                    value="确定" class="button"
-                                                                                   onclick="window.location.href = 'success.html'"/>
+                                                                                   onclick="getReaderInfo4Borrow()"/>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -93,24 +117,24 @@
                                                                        cellspacing="0">
                                                                     <tr>
                                                                         <td height="27">姓&nbsp;&nbsp;&nbsp;&nbsp;名：
-                                                                            <input name="readername" type="text"
-                                                                                   id="readername" value=""></td>
+                                                                            <input name="rname" type="text"
+                                                                                   id="rname" value=""></td>
                                                                         <td>性&nbsp;&nbsp;&nbsp;&nbsp;别：
-                                                                            <input name="sex" type="text" id="sex"
+                                                                            <input name="gender" type="text" id="gender"
                                                                                    value=""></td>
                                                                         <td>读者类型：
-                                                                            <input name="readerType" type="text"
-                                                                                   id="readerType" value=""></td>
+                                                                            <input name="rtypename" type="text"
+                                                                                   id="rtypename" value=""></td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td height="27">证件类型：
-                                                                            <input name="paperType" type="text"
-                                                                                   id="paperType" value=""></td>
+                                                                            <input name="papertype" type="text"
+                                                                                   id="papertype" value=""></td>
                                                                         <td>证件号码：
-                                                                            <input name="paperNo" type="text"
-                                                                                   id="paperNo" value=""></td>
+                                                                            <input name="paperno" type="text"
+                                                                                   id="paperno" value=""></td>
                                                                         <td>可借数量：
-                                                                            <input name="number" type="text" id="number"
+                                                                            <input name="count" type="text" id="count"
                                                                                    value="0" size="17">
                                                                             册
                                                                             &nbsp;</td>
@@ -123,7 +147,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td height="32" background="../Images/borrow_if.gif">&nbsp;添加的依据：
+                                                <td height="32" background="Images/borrow_if.gif">&nbsp;添加的依据：
                                                     <input name="f" type="radio" class="noborder" value="barcode"
                                                            checked>
                                                     图书条形码 &nbsp;&nbsp;
@@ -169,7 +193,7 @@
                                                onclick="alert('提交成功！');"/>　
                                     </td>
 
-                                    <td height="19" background="../Images/main_booksort_2.gif">&nbsp;</td>
+                                    <td height="19" background="Images/main_booksort_2.gif">&nbsp;</td>
                                 </tr>
                             </form>
                         </table>
