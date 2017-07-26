@@ -1,9 +1,13 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 
 <head>
-    <title>图书馆管理系统</title>
-    <link href="../css/style.css" rel="stylesheet">
-    <script src="../js/function.js"></script>
+    <base href="${applicationScope.basePath}">
+    <title>图书借阅查询</title>
+
+    <link href="css/style.css" rel="stylesheet">
+    <script src="js/function.js"></script>
     <script language="javascript">
         function check(myform) {
             if (myform.flag[0].checked == false && myform.flag[1].checked == false) {
@@ -51,12 +55,13 @@
                             </tr>
                             <tr>
                                 <td align="center" valign="top">
-                                    <form name="myform" method="post" action="borrow.do?action=borrowQuery">
+                                    <form name="myform" method="post" action="sysQuery.action">
+                                        <input type="hidden" name="m" value="borrowQuery">
                                         <table width="98%" height="67" border="0" cellpadding="0" cellspacing="0"
                                                bgcolor="#E3F4F7" class="tableBorder_gray">
                                             <tr>
                                                 <td rowspan="2" align="center" bgcolor="#F9D16B">&nbsp;<img
-                                                        src="../Images/search.gif" width="45" height="28"></td>
+                                                        src="Images/search.gif" width="45" height="28"></td>
                                                 <td height="29" bgcolor="#F9D16B"><input name="flag" type="checkbox"
                                                                                          class="noborder" value="a"
                                                                                          checked>
@@ -67,8 +72,8 @@
                                                         <option value="readerbarcode">读者条形码</option>
                                                         <option value="readername">读者名称</option>
                                                     </select>
-                                                    <input name="key" type="text" id="key" size="50">
-                                                    <input name="Submit232" type="submit" class="right-button02"
+                                                    <input name="bookname" type="text" id="bookname" size="50">
+                                                    <input name="submit" type="submit" class="right-button02"
                                                            value="查 询"/></td>
                                             </tr>
                                             <tr>
@@ -96,75 +101,17 @@
                                             <td width="8%" bgcolor="#F9D16B">是否归还</td>
                                         </tr>
 
+                                        <c:forEach items="${bqList}" var="bq">
                                         <tr>
-                                            <td style="padding:5px;">&nbsp;9787302047230</td>
-                                            <td style="padding:5px;">Java学习指南</td>
-                                            <td style="padding:5px;">&nbsp;2008010100001</td>
-                                            <td style="padding:5px;">&nbsp;wgh</td>
-                                            <td style="padding:5px;">&nbsp;2007-11-22</td>
-                                            <td style="padding:5px;">&nbsp;2007-12-22</td>
-                                            <td align="center" style="padding:5px;">&nbsp;已归还</td>
+                                            <td style="padding:5px;">${bq.bookid}</td>
+                                            <td style="padding:5px;">${bq.bookname}</td>
+                                            <td style="padding:5px;">${bq.rid}</td>
+                                            <td style="padding:5px;">${bq.rname}</td>
+                                            <td style="padding:5px;">${bq.borrowtime}</td>
+                                            <td style="padding:5px;">${bq.limitbacktime}</td>
+                                            <td align="center" style="padding:5px;">${bq.ifback}</td>
                                         </tr>
-
-                                        <tr>
-                                            <td style="padding:5px;">&nbsp;9787115157690</td>
-                                            <td style="padding:5px;">JSP啊</td>
-                                            <td style="padding:5px;">&nbsp;2008010100001</td>
-                                            <td style="padding:5px;">&nbsp;wgh</td>
-                                            <td style="padding:5px;">&nbsp;2007-11-26</td>
-                                            <td style="padding:5px;">&nbsp;2007-12-26</td>
-                                            <td align="center" style="padding:5px;">&nbsp;未归还</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td style="padding:5px;">&nbsp;9787302047230</td>
-                                            <td style="padding:5px;">Java学习指南</td>
-                                            <td style="padding:5px;">&nbsp;2008010100001</td>
-                                            <td style="padding:5px;">&nbsp;wgh</td>
-                                            <td style="padding:5px;">&nbsp;2007-11-26</td>
-                                            <td style="padding:5px;">&nbsp;2007-12-26</td>
-                                            <td align="center" style="padding:5px;">&nbsp;未归还</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td style="padding:5px;">&nbsp;001</td>
-                                            <td style="padding:5px;">建筑测试</td>
-                                            <td style="padding:5px;">&nbsp;2008010100001</td>
-                                            <td style="padding:5px;">&nbsp;wgh</td>
-                                            <td style="padding:5px;">&nbsp;2013-05-03</td>
-                                            <td style="padding:5px;">&nbsp;2013-05-23</td>
-                                            <td align="center" style="padding:5px;">&nbsp;已归还</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td style="padding:5px;">&nbsp;001</td>
-                                            <td style="padding:5px;">建筑测试</td>
-                                            <td style="padding:5px;">&nbsp;2008010100001</td>
-                                            <td style="padding:5px;">&nbsp;wgh</td>
-                                            <td style="padding:5px;">&nbsp;2013-05-03</td>
-                                            <td style="padding:5px;">&nbsp;2013-05-23</td>
-                                            <td align="center" style="padding:5px;">&nbsp;已归还</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td style="padding:5px;">&nbsp;001</td>
-                                            <td style="padding:5px;">建筑测试</td>
-                                            <td style="padding:5px;">&nbsp;2008010100001</td>
-                                            <td style="padding:5px;">&nbsp;wgh</td>
-                                            <td style="padding:5px;">&nbsp;2013-05-03</td>
-                                            <td style="padding:5px;">&nbsp;2013-05-23</td>
-                                            <td align="center" style="padding:5px;">&nbsp;已归还</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td style="padding:5px;">&nbsp;9787302047230</td>
-                                            <td style="padding:5px;">Java学习指南</td>
-                                            <td style="padding:5px;">&nbsp;2008010100001</td>
-                                            <td style="padding:5px;">&nbsp;wgh</td>
-                                            <td style="padding:5px;">&nbsp;2013-05-03</td>
-                                            <td style="padding:5px;">&nbsp;2013-06-02</td>
-                                            <td align="center" style="padding:5px;">&nbsp;未归还</td>
-                                        </tr>
+                                        </c:forEach>
 
                                     </table>
                                 </td>
@@ -199,7 +146,7 @@
                                                        size="1"/>
                                             </td>
                                             <td width="87%">
-                                                <input name="Submit23222" type="submit" class="right-button06"
+                                                <input name="Submit23222" type="button" class="right-button06"
                                                        value=" "/>
                                             </td>
                                         </tr>

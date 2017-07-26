@@ -1,14 +1,14 @@
-package com.lbg.library.dao;
+package com.lbg.library.service;
 
 import com.lbg.library.entity.BQuery;
 
 import java.util.List;
 
 /**
- * SysQueryDao接口
+ * SysQueryService接口
  * 2017/7/26.
  */
-public interface SysQueryDao {
+public interface SysQueryService {
 
     /**
      * 图书借阅查询

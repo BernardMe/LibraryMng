@@ -89,7 +89,7 @@
                     <a >系统查询</a>
                     <ul class="large">
                         <li><a href="book.action?m=queryAll4sys&page=1" target="navFrame">图书档案查询</a></li>
-                        <li><a href="sysQuery/borrowQuery.html" target="navFrame">图书借阅查询</a></li>
+                        <li><a href="sysQuery.action?m=borrowQuery&bookname=" target="navFrame">图书借阅查询</a></li>
                         <li><a href="sysQuery/bremind.html" target="navFrame">借阅到期提醒</a></li>
                     </ul>
                 </li>
