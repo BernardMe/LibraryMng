@@ -7,8 +7,56 @@
 <title>图书馆管理系统</title>
 <base href="${applicationScope.basePath}">
 <link href="css/style.css" rel="stylesheet">
+<style>
+   .greenSpan{
+      color : green;
+   }
+   .redSpan{
+      color : red;
+   }
+</style>
 </head>
+<script src = "js/jquery.min.js"></script>
 <script language="javascript">
+//验证图书类型名
+	function checkName(){
+		var name = $("#typename").val();
+		if(name == null || name.trim().length == 0){
+			$("#nameSpan").html("图书类型不能为空");
+			$("#nameSpan").attr("class","redSpan");
+			return false;
+		}else{
+			$("#nameSpan").html("ok");
+			$("#nameSpan").attr("class","greenSpan");
+			return true;
+		}
+	}
+	//验证天数
+	function checkDays(){
+		var days = $("#days").val();
+		var regex = /^\d{1,2}$/;
+		if(days == null || days.trim().length == 0){
+			$("#daySpan").html("可借天数不能为空");
+			$("#daySpan").attr("class","redSpan");
+			return false;
+		}else if(regex.test(days)){
+			$("#daySpan").html("ok");
+			$("#daySpan").attr("class","greenSpan");
+			return true;
+		}else{
+			$("#daySpan").html("可借天数必须为数字");
+			$("#daySpan").attr("class","redSpan");
+			return false;
+		}
+	}
+	//检查所有
+	function checkAll(){
+		if(checkName()&checkDays()){
+			return true;
+		}else{
+			return false;
+		}
+	}
 
 
 </script>
@@ -38,17 +86,17 @@
     <td width="27%" align="left" style="padding:5px;">书籍类型名称：</td>
    
     <td width="73%" align="left">
-    	<input name="typename" type="text" id="typename" size="30">
+    	<input name="typename" type="text" id="typename" size="20" onblur = "checkName();">&nbsp;<span id = "nameSpan"></span>
     </tr>
     <tr>
     <td align="left" style="padding:5px;">可借天数：</td>
     <td align="left">
-    	<input name="days" type="text" id="days" size="30">
+    	<input name="days" type="text" id="days" size="20" onblur = "checkDays();">&nbsp;<span id = "daySpan"></span>
     </tr>
     
     <tr>
       <td height="65" align="left" style="padding:5px;">&nbsp;</td>
-      <td><input type="submit" name="Submit" value="保存" class="button" />
+      <td><input type="submit" name="Submit" value="保存" class="button" onclick = " return checkAll();"/>
         &nbsp;
         <input type="reset" name="Submit" value="取消" class="button"/></td>
     </tr>

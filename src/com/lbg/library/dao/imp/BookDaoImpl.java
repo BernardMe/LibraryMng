@@ -53,8 +53,8 @@ public class BookDaoImpl extends BaseDaoImp implements BookDao {
 	/********************************* 对书的操作 ************************************************************/
 	@Override
 	public int addBook(BookInfo bookInfo) {
-		String sql = "insert into tb_bookinfo values(?,?,?,?,?,?,?,?,?,?,?,?)";
-		return baseUpdate(sql, bookInfo.getBookid(), bookInfo.getBookname(), bookInfo.getTypeid(), bookInfo.getAuthor(), bookInfo.getTranslator(), bookInfo.getIsbn(),
+		String sql = "insert into tb_bookinfo values(0,?,?,?,?,?,?,?,?,?,?,?)";
+		return baseUpdate(sql, bookInfo.getBookname(), bookInfo.getTypeid(), bookInfo.getAuthor(), bookInfo.getTranslator(), bookInfo.getIsbn(),
 				bookInfo.getPrice(), bookInfo.getPage(), bookInfo.getShelfid(), bookInfo.getIntime(), bookInfo.getOperator(), bookInfo.getDel());
 	}
 

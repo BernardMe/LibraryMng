@@ -128,7 +128,7 @@ public class BookServlet extends BaseServlet {
 	 */
 	public void addBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// 接收前台的数据
-		int barcode = Integer.parseInt(req.getParameter("barcode"));
+		//int barcode = Integer.parseInt(req.getParameter("barcode"));
 		String bookname = req.getParameter("bookname");
 		int typeid = Integer.parseInt(req.getParameter("typeid"));
 		String author = req.getParameter("author");
@@ -142,7 +142,7 @@ public class BookServlet extends BaseServlet {
 		Date inTime = Date.valueOf(req.getParameter("inTime"));
 		// 创建bookInfo对象，封装数据
 		BookInfo bookInfo = new BookInfo();
-		bookInfo.setBookid(barcode);
+		//bookInfo.setBookid(barcode);
 		bookInfo.setBookname(bookname);
 		bookInfo.setTypeid(typeid);
 		bookInfo.setAuthor(author);

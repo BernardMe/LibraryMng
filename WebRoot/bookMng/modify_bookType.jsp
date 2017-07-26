@@ -1,5 +1,3 @@
-
-
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -7,26 +5,76 @@
 <title>图书馆管理系统</title>
 <base href="${applicationScope.basePath}">
 <link href="css/style.css" rel="stylesheet">
+<style>
+   .greenSpan{
+      color : green;
+   }
+   .redSpan{
+      color : red;
+   }
+</style>
 <script src= "js/jquery.min.js"></script>
 </head>
 <script language="javascript">
-     $(function(){
-    	 $("#btn").bind("click",function(){
-    		 var result = window.confirm("确认修改吗？");
-    		 if(result){
-    			 var param = {"m":"updateBookType","typeid":${param.typeid},"typename":$("#typename").val(),"days":$("#days").val()};
-    			 $.post("book.action",param,function(data){
-    				 if(data=="success"){
-    					 window.opener.location="book.action?m=queryAllBookType";
-    					 window.close();
-    				 }else{
-    					 alert("修改失败");
-    				 }
-    			 });
-    		 }
-    	 });
-     });
+   
+    	function bindClick(){
+    		 if(checkAll()){
+	    		 var result = window.confirm("确认修改吗？");
+	    		 if(result){
+	    			 var param = {"m":"updateBookType","typeid":${param.typeid},"typename":$("#typename").val(),"days":$("#days").val()};
+	    			 $.post("book.action",param,function(data){
+	    				 if(data=="success"){
+	    					 window.opener.location="book.action?m=queryAllBookType";
+	    					 window.close();
+	    				 }else{
+	    					 alert("修改失败");
+	    				 }
+	    			 });
+	    		 }
+    	  }
+    	}
+     
 
+   //验证图书类型名
+ 	function checkName(){
+ 		var name = $("#typename").val();
+ 		if(name == null || name.trim().length == 0){
+ 			$("#nameSpan").html("图书类型不能为空");
+ 			$("#nameSpan").attr("class","redSpan");
+ 			return false;
+ 		}else{
+ 			$("#nameSpan").html("ok");
+ 			$("#nameSpan").attr("class","greenSpan");
+ 			return true;
+ 		}
+ 	}
+ 	//验证天数
+ 	function checkDays(){
+ 		var days = $("#days").val();
+ 		var regex = /^\d{1,2}$/;
+ 		if(days == null || days.trim().length == 0){
+ 			$("#daySpan").html("可借天数不能为空");
+ 			$("#daySpan").attr("class","redSpan");
+ 			return false;
+ 		}else if(regex.test(days)){
+ 			$("#daySpan").html("ok");
+ 			$("#daySpan").attr("class","greenSpan");
+ 			return true;
+ 		}else{
+ 			$("#daySpan").html("可借天数必须为两位数字");
+ 			$("#daySpan").attr("class","redSpan");
+ 			return false;
+ 		}
+ 	}
+ 	//检查所有
+ 	function checkAll(){
+ 		alert(123);
+ 		if(checkName()&checkDays()){
+ 			return true;
+ 		}else{
+ 			return false;
+ 		}
+ 	}
 
 </script>
 <body onLoad="clockon(bgclock)">
@@ -51,7 +99,7 @@
     <td width="27%" align="left" style="padding:5px;">书籍类型名称：</td>
    
     <td width="73%" align="left" height="60px">
-    	<input name="typename" type="text" id="typename" size="30" value = "${param.typename}">
+    	<input name="typename" type="text" id="typename" size="20" value = "${param.typename}" onblur = "checkName();">&nbsp;<span id = "nameSpan"></span>
     </tr>
     <br />
     <br />
@@ -60,12 +108,13 @@
     <tr>
     <td align="left" style="padding:5px;">可借天数：</td><br />
     <td align="left">
-    	<input name="days" type="text" id="days" size="30" value = "${param.days}">
+    	<input name="days" type="text" id="days" size="20" value = "${param.days}" onblur = "checkDays();">&nbsp;<span id = "daySpan"></span>
     </tr>
     
     <tr>
       <td height="65" align="left" style="padding:5px;">&nbsp;</td>
-      <td align = "center"><input type="button" name="Submit" value="保存" class="button" id = "btn"  />
+   <td align = "center"><input type="button" name="Submit" value="保存" class="button" id = "btn" onclick="bindClick();"/>
+      
        </td>
     </tr>
 </table>
