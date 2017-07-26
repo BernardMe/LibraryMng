@@ -43,9 +43,11 @@ $(function(){
 		if(bookname==null||bookname.trim().length==0){
 			$("#nameSpan").html("图书名称不能为空");
 			$("#nameSpan").attr("class","redSpan");
+			return false;
 		}else{
 			$("#nameSpan").html("ok");
 			$("#nameSpan").attr("class","greenSpan");
+			return true;
 		}
 	}
 	//校验作者
@@ -54,9 +56,11 @@ $(function(){
 		if(author==null||author.trim().length==0){
 			$("#AuthorSpan").html("作者不能为空");
 			$("#AuthorSpan").attr("class","redSpan");
+			return false;
 		}else{
 			$("#AuthorSpan").html("ok");
 			$("#AuthorSpan").attr("class","greenSpan");
+			return true;
 		}
 	}
 	//校验翻译者
@@ -65,9 +69,11 @@ $(function(){
 		if(translator==null||translator.trim().length==0){
 			$("#TrSpan").html("翻译者不能为空");
 			$("#TrSpan").attr("class","redSpan");
+			return false;
 		}else{
 			$("#TrSpan").html("ok");
 			$("#TrSpan").attr("class","greenSpan");
+			return true;
 		}
 	}
 	//校验价格
@@ -76,28 +82,34 @@ $(function(){
 		var regex = /^\d{1,6}$/;
 		if(price == null || price.trim().length == 0){
 			$("#priceSpan").html("价格不能为空");
-			$("#priceSpan").attr("class","redSpan")
+			$("#priceSpan").attr("class","redSpan");
+			return false;
 		}else if(regex.test(price)){
 			$("#priceSpan").html("ok");
 			$("#priceSpan").attr("class","greenSpan");
+			return true;
 		}else{
 			$("#priceSpan").html("价格必须为数字");
 			$("#priceSpan").attr("class","redSpan");
+			return false;
 		}
 	}
 	//校验页数
 	 function checkPage(){
 		var page = $("#page").val();
-		var regex = /^\d{1,6}$/;
+		var regex = /^\d+$/;
 		if(page == null || page.trim().length == 0){
 			$("#pageSpan").html("页数不能为空");
 			$("#pageSpan").attr("class","redSpan");
-		}else if(regex.test(price)){
+			return false;
+		}else if(regex.test(page)){
 			$("#pageSpan").html("ok");
-			$("#pageSpan").attr("class","greenSpan")
+			$("#pageSpan").attr("class","greenSpan");
+			return true;
 		}else{
 			$("#pageSpan").html("页数必须为数字");
 			$("#pageSpan").attr("class","redSpan");
+			return false;
 		}
 	}
 	//校验typeid
@@ -106,9 +118,11 @@ $(function(){
 		if(typeid == -1){
 			$("#tpSpan").html("必须选择一项");
 			$("#tpSpan").attr("class","redSpan");
+			return false;
 		}else{
 			$("#tpSpan").html("ok");
 			$("#tpSpan").attr("class","greenSpan");
+			return true;
 		}
 	}
 	//校验isbn
@@ -117,9 +131,11 @@ $(function(){
 		if(isbn == -1){
 			$("#isbnSpan").html("必须选择一项");
 			$("#isbnSpan").attr("class","redSpan");
+			return false;
 		}else{
 			$("#isbnSpan").html("ok");
 			$("#isbnSpan").attr("class","greenSpan");
+			return true;
 		}
 	}
 	//校验书架
@@ -128,9 +144,11 @@ $(function(){
 		if(bookcaseid == -1){
 			$("#caseSpan").html("必须选择一项");
 			$("#caseSpan").attr("class","redSpan");
+			return false;
 		}else{
 			$("#caseSpan").html("ok");
 			$("#caseSpan").attr("class","greenSpan");
+			return true;
 		}
 	}
 	function checkAll(){
@@ -230,7 +248,7 @@ $(function(){
     <tr>
     <td align="left" style="padding:5px;">操作员：</td>
     <td align="left">
-    	<input name="operator" type="text" id="operator" size="20" onblur = "checkOp();">&nbsp;<span id = "opSpan"></span>
+    	<input name="operator" type="text" id="operator" size="20" value = "${ user.mname}" disabled>
     </tr>
     
     <tr>

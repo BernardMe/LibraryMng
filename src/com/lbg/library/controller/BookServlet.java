@@ -98,7 +98,7 @@ public class BookServlet extends BaseServlet {
 	 */
 	public void queryAllBookType(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 		String page = req.getParameter("page");
-		PageUtil<BookType> pu = new PageUtil<>(page,5,bs.countBookType());
+		PageUtil<BookType> pu = new PageUtil<>(page,15,bs.countBookType());
 		bs.queryAllBookType(pu);
 		req.setAttribute("pu", pu);
 		req.getRequestDispatcher("bookMng/bookType.jsp").forward(req, resp);
@@ -156,7 +156,7 @@ public class BookServlet extends BaseServlet {
 		bookInfo.setDel(del);
 		if (bs.addBook(bookInfo) > 0) {
 			// 成功
-			req.getRequestDispatcher("bookMng/book.jsp").forward(req, resp);
+			req.getRequestDispatcher("book.action?m=queryAllBook&page=1").forward(req, resp);
 		} else {
 			// 失败
 			req.getRequestDispatcher("bookMng/add_book.jsp").forward(req, resp);
@@ -189,7 +189,7 @@ public class BookServlet extends BaseServlet {
 	 */
 	public void queryAllBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 		    String page = req.getParameter("page");
-		    PageUtil<BookInfo> pu = new PageUtil<>(page, 5, bs.countBookInfo());
+		    PageUtil<BookInfo> pu = new PageUtil<>(page, 15, bs.countBookInfo());
 		    bs.queryAllBook(pu);
 			req.setAttribute("pu", pu);
 			req.getRequestDispatcher("bookMng/book.jsp").forward(req, resp);

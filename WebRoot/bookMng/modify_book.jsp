@@ -41,7 +41,7 @@ $(function(){
 	//获取书架
 	 $.getJSON("shelf.action",{"m":"query4shelf"},function(data){
 		for(var i = 0; i < data.length;i++){
-		if(data[i].shelfid == "${param.shelf}"){
+		if(data[i].shelfid == "${param.shelfid}"){
 			$("#bookcaseid").append(new Option(data[i].shelfname, data[i].shelfid,true,true));
 		}else{
 			$("#bookcaseid").append(new Option(data[i].shelfname, data[i].shelfid));
