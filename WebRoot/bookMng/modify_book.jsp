@@ -55,7 +55,7 @@ function bindClick(){
 	if(checkAll()){
 		var result = window.confirm("确定修改吗？");
 		if(result){
-			var param = {"m":"updateBookInfo","bookid":"${param.bookid}","typeid":$("#typeid").val(),"shelfid":$("#shelfid").val(),
+			var param = {"m":"updateBookInfo","bookid":"${param.bookid}","typeid":$("#typeid").val(),"shelfid":$("#bookcaseid").val(),
 						  "bookname":$("#bookname").val(),"isbn":$("#isbn").val()};
 			$.get("book.action",param,function(data){
 				if(data == "success"){
@@ -75,9 +75,11 @@ function checkName(){
 	if(bookname==null||bookname.trim().length==0){
 		$("#nameSpan").html("图书名称不能为空");
 		$("#nameSpan").attr("class","redSpan");
+		return false;
 	}else{
 		$("#nameSpan").html("ok");
 		$("#nameSpan").attr("class","greenSpan");
+		return true;
 	}
 }
 //校验typeid
@@ -86,9 +88,11 @@ function checkTp(){
 	if(typeid == -1){
 		$("#tpSpan").html("必须选择一项");
 		$("#tpSpan").attr("class","redSpan");
+		return false;
 	}else{
 		$("#tpSpan").html("ok");
 		$("#tpSpan").attr("class","greenSpan");
+		return true;
 	}
 }
 //校验isbn
@@ -97,9 +101,11 @@ function checkIsbn(){
 	if(isbn == -1){
 		$("#isbnSpan").html("必须选择一项");
 		$("#isbnSpan").attr("class","redSpan");
+		return false;
 	}else{
 		$("#isbnSpan").html("ok");
 		$("#isbnSpan").attr("class","greenSpan");
+		return true;
 	}
 }
 //校验书架
@@ -108,9 +114,11 @@ function checkCase(){
 	if(bookcaseid == -1){
 		$("#caseSpan").html("必须选择一项");
 		$("#caseSpan").attr("class","redSpan");
+		return false;
 	}else{
 		$("#caseSpan").html("ok");
 		$("#caseSpan").attr("class","greenSpan");
+		return true;
 	}
 }
 function checkAll(){

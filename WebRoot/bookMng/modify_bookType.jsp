@@ -68,7 +68,6 @@
  	}
  	//检查所有
  	function checkAll(){
- 		alert(123);
  		if(checkName()&checkDays()){
  			return true;
  		}else{
