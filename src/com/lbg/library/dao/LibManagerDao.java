@@ -22,4 +22,9 @@ public interface LibManagerDao {
 	 * 管理员登陆
 	 */
 	List<LibManager> query4Login(String mname,String mpwd);
+	/**
+	 * 更新密码
+	 */
+	int updateMpwd(String mname,String mpwd);
+	
 }

@@ -76,4 +76,34 @@ public class LibManagerServlet extends BaseServlet {
 			rsp.getWriter().print("fail");
 		}
 	}
+	/**
+	 * 检验原密码是否正确
+	 */
+	public void checkManager(HttpServletRequest req, HttpServletResponse rsp)
+			throws ServletException, IOException {
+		String mname=req.getParameter("mname");
+		String mpwd=req.getParameter("mpwd");
+		List<LibManager> list = lms.query4Login(mname, mpwd);
+		if(list.size()>0){
+			rsp.getWriter().print("success");
+		}else{
+			rsp.getWriter().print("fail");
+		}
+		
+	}
+	
+	/**
+	 * 更改管理员密码
+	 */
+	public void updateMpwd(HttpServletRequest req, HttpServletResponse rsp)
+			throws ServletException, IOException {
+		String mname=req.getParameter("mname");
+		String mpwd=req.getParameter("mpwd");
+		int upd = lms.updateMpwd(mname, mpwd);
+		if(upd>0){
+			rsp.getWriter().print("success");
+		}else{
+			rsp.getWriter().print("fail");
+		}
+	}
 }	

@@ -11,4 +11,9 @@ public interface LibraryDao {
 	 * @return
 	 */
 	List<Library> showLibrary();
+	/**
+	 * 更新图书馆信息
+	 */
+	int updateLibrary(Library library);
+	
 }

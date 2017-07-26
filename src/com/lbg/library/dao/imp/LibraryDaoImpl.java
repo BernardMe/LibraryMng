@@ -12,5 +12,11 @@ public class LibraryDaoImpl extends BaseDaoImp implements LibraryDao {
 		String sql="select * from tb_library";
 		return baseQuery(Library.class, sql);
 	}
+	
+	@Override
+	public int updateLibrary(Library library) {
+		String sql="update tb_library set libraryname=?,curator=?,tel=?,address=?,email=?,url=?,createdate=?,introduce=? where libraryid=1";
+		return baseUpdate(sql,library.getLibraryname(),library.getCurator(),library.getTel(),library.getAddress(),library.getEmail(),library.getUrl(),library.getCreatedate(),library.getIntroduce() );
+	}
 
 }

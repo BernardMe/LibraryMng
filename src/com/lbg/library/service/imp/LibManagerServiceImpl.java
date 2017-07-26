@@ -29,6 +29,11 @@ public class LibManagerServiceImpl implements LibManagerService {
 		// TODO Auto-generated method stub
 		return dao.query4Login(mname, mpwd);
 	}
+	@Override
+	public int updateMpwd(String mname, String mpwd) {
+		// TODO Auto-generated method stub
+		return dao.updateMpwd(mname, mpwd);
+	}
 	
 
 }

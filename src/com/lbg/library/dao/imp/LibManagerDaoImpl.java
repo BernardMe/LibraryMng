@@ -32,5 +32,11 @@ public class LibManagerDaoImpl extends BaseDaoImp implements LibManagerDao {
 		return baseQuery(LibManager.class, sql, mname,mpwd);
 	}
 
+	@Override
+	public int updateMpwd(String mname, String mpwd) {
+		String sql="update tb_manager set mpwd=md5(?) where mname=?";
+		return baseUpdate(sql, mpwd,mname);
+	}
+
 
 }

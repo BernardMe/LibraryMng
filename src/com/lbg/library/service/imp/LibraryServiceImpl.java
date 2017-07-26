@@ -15,5 +15,11 @@ public class LibraryServiceImpl implements LibraryService {
 		// TODO Auto-generated method stub
 		return dao.showLibrary();
 	}
+
+	@Override
+	public int updateLibrary(Library library) {
+		// TODO Auto-generated method stub
+		return dao.updateLibrary(library);
+	}
 	
 }
