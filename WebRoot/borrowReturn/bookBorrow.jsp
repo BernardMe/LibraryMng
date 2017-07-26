@@ -10,31 +10,32 @@
 
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript">
-        function checkreader(form) {
-            if (form.barcode.value == "") {
-                alert("请输入读者条形码!");
-                form.barcode.focus();
-                return;
-            }
-            form.submit();
-        }
+
         function checkbook(form) {
-            if (form.barcode.value == "") {
+            if (form.rid.value == "") {
                 alert("请输入读者条形码!");
-                form.barcode.focus();
-                return;
-            }
-            if (form.inputkey.value == "") {
-                alert("请输入查询关键字!");
-                form.inputkey.focus();
+                form.rid.focus();
                 return;
             }
 
-            if (form.number.value - form.borrowNumber.value <= 0) {
+            //jquery获取复选框值
+            var chk_value =[];//定义一个数组
+            $('input[name="info"]:checked').each(function(){//遍历每一个名字为interest的复选框，其中选中的执行函数
+                chk_value.push($(this).val());//将选中的值添加到数组chk_value中
+            });
+            console.log(chk_value);
+            if (chk_value.length <= 0) {
+                alert("您还没有选择图书!");
+                return;
+            }
+            //检查书本数量
+            var count = $("#count").val();
+            if (count - chk_value.length < 0) {
                 alert("您不能再借阅其他图书了!");
                 return;
             }
-            form.submit();
+
+            saveBorrow(chk_value);
         }
 
         /**
@@ -42,9 +43,13 @@
          */
         function getReaderInfo4Borrow() {
             var rid = $("#rid").val();
+            if (rid == "") {
+                alert("请输入读者ID!");
+                $("#rid").focus();
+                return;
+            }
             $.get("borrow.action", {"m": "getReaderInfo4Borrow", "rid": rid}, function (data) {
                 data = JSON.parse(data);
-                console.info(data[0]);
 
                 $("#rname").val(data[0].rname);
                 $("#gender").val(data[0].gender);
@@ -54,9 +59,53 @@
                 $("#count").val(data[0].count);
             });
         }
+
+        //TODO 查询借阅图书列表
+        function getBooks4Borrow() {
+            var bookname = $("#bookname").val();
+            if (bookname == "") {
+                 alert("请输入查询关键字!");
+                $("#bookname").focus();
+                 return;
+            }
+
+            $.get("borrow.action", {"m": "getBooks4Borrow", "bookname": bookname}, function (data) {
+                data = JSON.parse(data);
+
+                //清空表格体c1
+                $("#tbody").html('');
+                //拼tr*td
+                for(var i=0; i<data.length; i++){
+                    var tdstr = '<tr align="center" bgcolor="#F9D16B"><td height="25">'+data[i].bookname+'</td><td>'+data[i].borrowtm
+                        +'</td><td>'+data[i].limitbacktm+'</td><td>'+data[i].isbn+'</td><td>'+data[i].shelfid+'</td><td colspan="2">'
+                        +data[i].price+'</td><td align="center"><input type="checkbox" name="info" value="'+data[i].bookid+'" ></td></tr>';
+                    $("#tbody").append(tdstr);
+                }
+            });
+        }
+
+        function saveBorrow(chk_value) {
+            //获取rid
+            var rid = $("#rid").val();
+
+
+            $.post("borrow.action", {"m": "saveBorrow", "rid": rid, "bookid": chk_value}, function (data) {
+                if (data == "1"){
+                    alert("Success");
+                    //刷新页面
+                    queryAgain();
+                } else {
+                    alert("失败");
+                }
+            });
+        }
+
+        function queryAgain() {
+            location = 'borrowReturn/bookBorrow.jsp';
+        }
     </script>
 </head>
-<body onLoad="clockon(bgclock)">
+<body>
 
 
 <table width="778" border="0" cellspacing="0" cellpadding="0" align="center">
@@ -70,7 +119,9 @@
                 <tr>
                     <td align="center" valign="top" style="padding:5px;">
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                            <form name="form1" method="post" action="borrow.do?action=bookborrow">
+                            <form name="form1" method="post" action="borrow.action">
+
+                                <input type="hidden" name="m" value="saveBorrow">
                                 <tr>
                                     <td height="47" background="Images/borrowBackRenew.gif">&nbsp;</td>
                                 </tr>
@@ -95,7 +146,7 @@
                                                                             <img src="Images/reader_checkbg.jpg"
                                                                                  width="142" height="18"></td>
                                                                         <td width="76%" style="padding-top:7px;">读者条形码：
-                                                                            <input name="barcode" type="text"
+                                                                            <input name="rid" type="text"
                                                                                    id="rid" value="" size="24">
                                                                             &nbsp;
                                                                             <input type="button" name="Submit"
@@ -148,14 +199,14 @@
                                             </tr>
                                             <tr>
                                                 <td height="32" background="Images/borrow_if.gif">&nbsp;添加的依据：
-                                                    <input name="f" type="radio" class="noborder" value="barcode"
+                                                    <input name="f" type="radio" class="noborder" value="byid"
                                                            checked>
                                                     图书条形码 &nbsp;&nbsp;
-                                                    <input name="f" type="radio" class="noborder" value="bookname">
+                                                    <input name="f" type="radio" class="noborder" value="byname">
                                                     图书名称&nbsp;&nbsp;
-                                                    <input name="inputkey" type="text" id="inputkey" size="50">
+                                                    <input name="bookname" type="text" id="bookname" size="50" value="${bookname}">
                                                     <input type="button" name="Submit" value="查询" class="button"
-                                                           onclick="window.location.href = 'success.html'"/>
+                                                        onclick="getBooks4Borrow();"/>
 
                                                     <input name="operator" type="hidden" id="operator" value="java1234">
 
@@ -164,9 +215,10 @@
                                             </tr>
                                             <tr>
                                                 <td valign="top" bgcolor="#FCEC9A" style="padding:5px">
-                                                    <table width="99%" border="1" cellpadding="0" cellspacing="0"
+                                                    <table id="books" width="99%" border="1" cellpadding="0" cellspacing="0"
                                                            bordercolor="#FFFFFF" bordercolorlight="#FFFFFF"
                                                            bordercolordark="#F6B83B" bgcolor="#FFFFFF">
+                                                        <thead>
                                                         <tr align="center" bgcolor="#F9D16B">
                                                             <td width="24%" height="25">图书名称</td>
                                                             <td width="14%">借阅时间</td>
@@ -176,9 +228,11 @@
                                                             <td colspan="2">定价(元)</td>
                                                             <td width="10%" align="center">选择</td>
                                                         </tr>
-                                                        <!--<td bgcolor="#FFFFFF"><input id="course" type="checkbox"   name="${sc.courseid}" value="${sc.tid }#${sc.courseid}" onclick="check(${sc.tid },${sc.courseid});"/></td>-->
-                                                        <input name="borrowNumber" type="hidden" id="borrowNumber"
-                                                               value="0">
+                                                        </thead>
+                                                        <tbody id="tbody">
+
+                                                        </tbody>
+
                                                     </table>
                                                 </td>
                                             </tr>
@@ -190,7 +244,7 @@
                                 <tr>
                                     <td align="center" height="40px">
                                         <input type="button" name="Submit" value="确定借阅" class="button"
-                                               onclick="alert('提交成功！');"/>　
+                                            onclick="checkbook(form1);"/>　
                                     </td>
 
                                     <td height="19" background="Images/main_booksort_2.gif">&nbsp;</td>
@@ -226,7 +280,7 @@
                                                        size="1"/>
                                             </td>
                                             <td width="87%">
-                                                <input name="Submit23222" type="submit" class="right-button06"
+                                                <input name="Submit23222" type="button" class="right-button06"
                                                        value=" "/>
                                             </td>
                                         </tr>
