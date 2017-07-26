@@ -40,7 +40,7 @@ public class BookServlet extends BaseServlet {
 		bt.setDays(days);
 		if (bs.addBookType(bt) > 0) {
 			// 添加成功
-			req.getRequestDispatcher("book.action?m=queryAllBookType").forward(req, resp);
+			req.getRequestDispatcher("book.action?m=queryAllBookType&page=1").forward(req, resp);
 		} else {
 			// 添加失败
 			req.getRequestDispatcher("bookMng/add_bookType.jsp").forward(req, resp);
@@ -58,13 +58,15 @@ public class BookServlet extends BaseServlet {
 	 */
 	public void updateBookType(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// 接收前台的数据
-		int typeid = Integer.parseInt(req.getParameter(""));
-		String typename = req.getParameter("");
-		int days = Integer.parseInt(req.getParameter(""));
+		int typeid = Integer.parseInt(req.getParameter("typeid"));
+		String typename = req.getParameter("typename");
+		int days = Integer.parseInt(req.getParameter("days"));
 		if (bs.updateBookType(typename, days, typeid) > 0) {
 			// 修改成功
+			resp.getWriter().print("success");
 		} else {
 			// 修改失败
+			resp.getWriter().print("fail");
 		}
 	}
 
@@ -193,8 +195,34 @@ public class BookServlet extends BaseServlet {
 			req.getRequestDispatcher("bookMng/book.jsp").forward(req, resp);
 		
 	}
-	/*************************国际图书编号
-	 * @throws IOException *******************************************/
+	/**
+	 * 修改图书的信息
+	 * @param req
+	 * @param resp
+	 * @throws IOException 
+	 */
+	public void updateBookInfo(HttpServletRequest req, HttpServletResponse resp) throws IOException{
+		//获取前台数据
+		int bookid = Integer.parseInt(req.getParameter("bookid"));
+		String bookname = req.getParameter("bookname");
+		int typeid = Integer.parseInt(req.getParameter("typeid"));
+		String isbn = req.getParameter("isbn");
+		int shelfid = Integer.parseInt(req.getParameter("shelfid"));
+		if(bs.updateBookInfo(bookid, bookname, typeid, isbn, shelfid) > 0 ){
+			//修改成功
+			resp.getWriter().print("success");
+		}else{
+			//修改失败
+			resp.getWriter().print("fail");
+		}
+	}
+	/*************************国际图书编  *******************************************/
+	/**
+	 * 对国际图书出版社的查询
+	 * @param req
+	 * @param resp
+	 * @throws IOException
+	 */
 	public void queryAllIsbn(HttpServletRequest req, HttpServletResponse resp) throws IOException{
 		List<BookIsbn> list = bs.queryAllIsbn();
 		Gson gson = new Gson();

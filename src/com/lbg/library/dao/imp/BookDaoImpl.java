@@ -22,7 +22,7 @@ public class BookDaoImpl extends BaseDaoImp implements BookDao {
 
 	@Override
 	public int updateBookType(String typename, int days, int typeid) {
-		String sql = "update tb_booktype set typename = ? and days = ? where typeid = ?";
+		String sql = "update tb_booktype set typename = ?,days = ? where typeid = ?";
 		return baseUpdate(sql, typename, days, typeid);
 	}
 
@@ -34,8 +34,8 @@ public class BookDaoImpl extends BaseDaoImp implements BookDao {
 
 	@Override
 	public void queryAllBookType(PageUtil<BookType> pu) {
-		String sql = "select * from tb_booktype";
-		List<BookType> list = baseQuery(BookType.class, sql);
+		String sql = "select * from tb_booktype limit ?,?";
+		List<BookType> list = baseQuery(BookType.class, sql,pu.getStart(),pu.getSize());
 		pu.setList(list);
 	}
 
@@ -66,8 +66,8 @@ public class BookDaoImpl extends BaseDaoImp implements BookDao {
 
 	@Override
 	public void queryAllBook(PageUtil<BookInfo> pu) {
-		String sql = "select bi.bookid,bi.bookname,bt.typename,s.shelfname,p.pubname from tb_bookinfo bi,tb_booktype bt,tb_publishing p,tb_shelf s where bi.typeid = bt.typeid and bi.isbn = p.isbn and bi.shelfid = s.shelfid";
-		 List<BookInfo> list = baseQuery(BookInfo.class, sql);
+		String sql = "select bi.bookid,bi.bookname,bi.typeid,bi.shelfid,bi.isbn,bt.typename,s.shelfname,p.pubname from tb_bookinfo bi,tb_booktype bt,tb_publishing p,tb_shelf s where bi.typeid = bt.typeid and bi.isbn = p.isbn and bi.shelfid = s.shelfid limit ?,?";
+		 List<BookInfo> list = baseQuery(BookInfo.class, sql,pu.getStart(),pu.getSize());
 		 pu.setList(list);
 	}
 	
@@ -77,6 +77,12 @@ public class BookDaoImpl extends BaseDaoImp implements BookDao {
 		return queryCount(sql);
 	}
 
+	@Override
+	public int updateBookInfo(int bookid, String bookname, int typeid, String isbn, int shelfid) {
+		String sql = "update tb_bookinfo set bookname=?,typeid=?,isbn=?,shelfid=? where bookid = ? ";
+		return baseUpdate(sql, bookname,typeid,isbn,shelfid,bookid);
+	}
+
 	/********************* 国际图书编号 **************************************/
 
 	@Override
@@ -84,6 +90,7 @@ public class BookDaoImpl extends BaseDaoImp implements BookDao {
 		String sql = "select * from tb_publishing";
 		return baseQuery(BookIsbn.class, sql);
 	}
+
 
 	
 

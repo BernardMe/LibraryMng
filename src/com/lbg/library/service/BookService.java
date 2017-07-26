@@ -75,5 +75,15 @@ public interface BookService {
 	 * @return
 	 */
 	List<BookIsbn> queryAllIsbn();
+	/**
+	 * 修改书的信息
+	 * @param bookid
+	 * @param bookname
+	 * @param typeid
+	 * @param isbn
+	 * @param shelfid
+	 * @return
+	 */
+	int updateBookInfo(int bookid,String bookname,int typeid,String isbn,int shelfid);
 
 }

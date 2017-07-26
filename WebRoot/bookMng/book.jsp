@@ -24,6 +24,7 @@
         	var page = $("#btn").val();
         	location = "book.action?m=queryAllBookType&page="+page;
         }
+     
     </script>
 </head>
 <body onLoad="clockon(bgclock)">
@@ -70,9 +71,10 @@
                                             <td style="padding:5px;">&nbsp;${books.pubname}</td>
                                             <td style="padding:5px;">&nbsp;${books.shelfname }</td>
 
-                                            <td align="center"><a href="">修改</a></td>
+                                            <td align="center"><a href="javascript:void(0);" onclick = "window.open('bookMng/modify_book.jsp?bookid=${books.bookid}&bookname=${books.bookname}&typeid=${books.typeid}&shelftid=${books.shelfid}&isbn=${books.isbn}','book','width=550, height=400, top=100, left=350');">修改</a></td>
                                             <td align="center"><a href="javascript:void(0);" onclick = "del('${books.bookid}');">删除</a></td>
                                         </tr>
+                                    
                                         </c:forEach>
                                     </table>
                                 </td>

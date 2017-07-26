@@ -63,7 +63,7 @@
                                         <tr>
                                             <td style="padding:5px;">${list.typename }</td>
                                             <td style="padding:5px;">${list.days}</td>
-                                            <td align="center" <a href=" ">修改</a>
+                                            <td align="center" <a href="javascript:void(0);" onclick = "window.open('bookMng/modify_bookType.jsp?typeid=${list.typeid}&typename=${list.typename}&days=${list.days}','booktype','width=550, height=400, top=100, left=350');">修改</a>
                                             </td>
                                             <td align="center"><a href="javascript:void(0);" onclick = "del('${list.typeid}');">删除</a></td>
                                         </tr>

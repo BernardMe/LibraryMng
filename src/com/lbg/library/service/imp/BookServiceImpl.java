@@ -55,10 +55,6 @@ public class BookServiceImpl implements BookService {
 		return dao.deleteBook(bookid);
 	}
 
-	@Override
-	public List<BookIsbn> queryAllIsbn() {
-		return dao.queryAllIsbn();
-	}
 
 	@Override
 	public void queryAllBook(PageUtil<BookInfo> pu) {
@@ -68,6 +64,16 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public int countBookInfo() {
 		return dao.countBookInfo();
+	}
+
+	@Override
+	public int updateBookInfo(int bookid, String bookname, int typeid, String isbn, int shelfid) {
+		return dao.updateBookInfo(bookid, bookname, typeid, isbn, shelfid);
+	}
+/*****************图书isbn*******************************/
+	@Override
+	public List<BookIsbn> queryAllIsbn() {
+		return dao.queryAllIsbn();
 	}
 
 	

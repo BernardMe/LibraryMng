@@ -68,6 +68,16 @@ public interface BookDao {
 	 * @return
 	 */
 	int countBookInfo();
+	/**
+	 * 修改书的信息
+	 * @param bookid
+	 * @param bookname
+	 * @param typeid
+	 * @param isbn
+	 * @param shelfid
+	 * @return
+	 */
+	int updateBookInfo(int bookid,String bookname,int typeid,String isbn,int shelfid);
 	/*********************************国际图书编号*******************************************************/
 	/**
 	 * 查询所有的出版社
