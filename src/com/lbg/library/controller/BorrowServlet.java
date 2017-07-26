@@ -112,8 +112,7 @@ public class BorrowServlet extends BaseServlet {
      * 更新续借记录
      */
     public void updateBorrow(HttpServletRequest req, HttpServletResponse rsp) throws ServletException, IOException {
-        //获取swid
-        int swid = Integer.parseInt(req.getParameter("swid"));
+
         //获取swids
         String[] swids = req.getParameterValues("swids[]");
         //获取operator
