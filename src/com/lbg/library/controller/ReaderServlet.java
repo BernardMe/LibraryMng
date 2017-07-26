@@ -124,7 +124,7 @@ public class ReaderServlet extends BaseServlet {
 		System.out.println(Byte.parseByte(req.getParameter("rtypeid")));
 		r.setRtypeid(Byte.parseByte(req.getParameter("rtypeid")));
 		//根据当前登录的用户名设置
-		r.setOperator("zmw");
+		r.setOperator(req.getParameter("operator"));
 		
 		
 		if (rs.addReader(r)) {

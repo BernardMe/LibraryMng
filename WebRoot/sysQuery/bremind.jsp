@@ -53,8 +53,8 @@
 										    <td style="padding:5px;">&nbsp;${borrowRemind.bookname }</td>
 										    <td style="padding:5px;">&nbsp;${borrowRemind.rid }</td>
 										    <td style="padding:5px;">&nbsp;${borrowRemind.rname }</td>
-										    <td style="padding:5px;">&nbsp;${borrowRemind.borrowtm }</td>
-										    <td style="padding:5px;">&nbsp;${borrowRemind.limitbacktm }</td>
+										    <td style="padding:5px;">&nbsp;${borrowRemind.borrowtime }</td>
+										    <td style="padding:5px;">&nbsp;${borrowRemind.limitbacktime }</td>
 																			    
 										  </tr>
 										</c:forEach>

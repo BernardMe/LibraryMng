@@ -15,8 +15,8 @@ public class Alert4Return {
     private String bookname;
 	private int rid;
 	private String rname;
-    private Date borrowtm;
-    private Date limitbacktm;
+    private Date borrowtime;
+    private Date limitbacktime;
     
 	public int getBookid() {
 		return bookid;
@@ -42,17 +42,18 @@ public class Alert4Return {
 	public void setRname(String rname) {
 		this.rname = rname;
 	}
-	public Date getBorrowtm() {
-		return borrowtm;
+	public Date getBorrowtime() {
+		return borrowtime;
 	}
-	public void setBorrowtm(Date borrowtm) {
-		this.borrowtm = borrowtm;
+	public void setBorrowtime(Date borrowtime) {
+		this.borrowtime = borrowtime;
 	}
-	public Date getLimitbacktm() {
-		return limitbacktm;
+	public Date getLimitbacktime() {
+		return limitbacktime;
 	}
-	public void setLimitbacktm(Date limitbacktm) {
-		this.limitbacktm = limitbacktm;
+	public void setLimitbacktime(Date limitbacktime) {
+		this.limitbacktime = limitbacktime;
 	}
+
  
 }

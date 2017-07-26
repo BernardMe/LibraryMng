@@ -195,6 +195,7 @@
 </table>  
 	<form name="form1" method="post" action="reader.action">
 	<input type="hidden" name="m" value="addReader" />
+		<input type="hidden" name="operator" value="${user.mname}" />
 
   <table align="center" width="50%"  border="0" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF" bordercolordark="#D2E3E6" bordercolorlight="#FFFFFF">
   <tr align="center">
