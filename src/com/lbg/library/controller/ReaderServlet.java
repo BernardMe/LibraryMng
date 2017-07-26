@@ -6,7 +6,6 @@ import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -44,11 +43,14 @@ public class ReaderServlet extends BaseServlet {
 		
 		if (rs.addReaderType(rt)) {
 			// 添加成功
-			req.getRequestDispatcher("/readerMng/success.jsp").forward(req, resp);
+			//req.getRequestDispatcher("/readerMng/success.jsp").forward(req, resp);
+			req.getRequestDispatcher("reader.action?m=getReaderTypeList&page=1").forward(req, resp);
+
 			return;
 		} else {
 			// 添加失败
-			req.getRequestDispatcher("/readerMng/error.jsp").forward(req, resp);
+			//req.getRequestDispatcher("/readerMng/error.jsp").forward(req, resp);
+			req.getRequestDispatcher("readerMng/add_readerType.jsp").forward(req, resp);
 			return;
 		}
 	}
@@ -119,6 +121,7 @@ public class ReaderServlet extends BaseServlet {
 		r.setEmail(req.getParameter("email"));
 		r.setCreatedate(Date.valueOf(req.getParameter("createdate")));
 		r.setRemark(req.getParameter("remark"));
+		System.out.println(Byte.parseByte(req.getParameter("rtypeid")));
 		r.setRtypeid(Byte.parseByte(req.getParameter("rtypeid")));
 		//根据当前登录的用户名设置
 		r.setOperator("zmw");
@@ -126,16 +129,47 @@ public class ReaderServlet extends BaseServlet {
 		
 		if (rs.addReader(r)) {
 			// 添加成功
-			req.getRequestDispatcher("/readerMng/success.jsp").forward(req, resp);
+			//req.getRequestDispatcher("/readerMng/success.jsp").forward(req, resp);
+			req.getRequestDispatcher("reader.action?m=getReaderList&page=1").forward(req, resp);
+
 			return;
 		} else {
 			// 添加失败
-			req.getRequestDispatcher("/readerMng/error.jsp").forward(req, resp);
+			//req.getRequestDispatcher("/readerMng/error.jsp").forward(req, resp);
+			req.getRequestDispatcher("readerMng/add_reader.jsp").forward(req, resp);
+
 			return;
 		}
 	}
 	
+	public void updateReader(HttpServletRequest req ,HttpServletResponse resp) throws IOException{
+		
+		Reader r = new Reader();
+		byte rid = Byte.parseByte(req.getParameter("rid"));
+		r.setRid(rid);
+		r.setRname(req.getParameter("rname"));
+		r.setGender(Byte.parseByte(req.getParameter("gender")));
+		r.setVocation(req.getParameter("vocation"));
+		r.setBirthday(Date.valueOf(req.getParameter("birthday")));
+		r.setPapertype(req.getParameter("papertype"));
+		r.setPaperno(req.getParameter("paperno"));
+		r.setTel(req.getParameter("tel"));
+		r.setEmail(req.getParameter("email"));
+				
+		if (rs.updateReader(r)) {
+			resp.getWriter().print("success");
+		} else {
+			resp.getWriter().print("fail");
+		}
+		
+	}
 	
+	/**
+	 * 添加读者时的option下拉框显示读者类型用
+	 * @param req
+	 * @param resp
+	 * @throws IOException
+	 */
 	public void queryReaderType4Ajax(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		List<ReaderType> list = rs.queryAll();
 		Gson gson = new Gson();

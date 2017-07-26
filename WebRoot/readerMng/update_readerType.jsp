@@ -13,7 +13,7 @@
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript">
 	
-/* 		function checkRtypename() {
+ 		function checkRtypename() {
 			$("#rtypenameSpan").empty();
 			
 			if($.trim($("#rtypename").val()).length == 0) {
@@ -23,10 +23,10 @@
 				$("#rtypenameSpan").append("&nbsp;<img src='img/ok.png' />");
 				return true;
 			}
-		} */
+		} 
 		
 		
-/* 		function checkCount() {
+ 		function checkCount() {
 			$("#countSpan").empty();
 			
 			if($.trim($("#count").val()).length == 0) {
@@ -36,12 +36,12 @@
 				$("#countSpan").append("&nbsp;<img src='img/ok.png' />");
 				return true;
 			}
-		} */
+		} 
 		
 		
-/* 		function checkAll() {
+ 		function checkAll() {
 			return checkRtypename() && checkCount();
-		} */
+		} 
 		
 	
 		$(function() {
@@ -112,16 +112,16 @@
   <tr align="center">
     <td width="27%" align="left" style="padding:5px;">读者类型名称：</td>
     <td width="73%" align="left">
-      <input name="rtypename" type="text" id="rtypename" value="${param.rtypename}"  size="30" > </td>
+      <input name="rtypename" type="text" id="rtypename" value="${param.rtypename}"  size="30" onblur="checkRtypename();"><span id="rtypenameSpan"></span> </td>
     <tr>
     <td align="left" style="padding:5px;">可借阅数量：</td>
-    <td align="left"><input name="count" type="text" id="count" value="${param.count}" size="30" >
+    <td align="left"><input name="count" type="text" id="count" value="${param.count}" size="30" onblur="checkCount();"><span id="countSpan"></span>
       </td>
     </tr>
     
     <tr>
       <td height="65" align="left" style="padding:5px;">&nbsp;</td>
-      <td><input type="button" id="save" value="保存" class="button" />&nbsp;
+      <td><input type="button" id="save" value="保存" class="button" onclick="return checkAll();"/>&nbsp;
 		<input type="button" id="cancel" value="取消" class="button" /></td>
     </tr>
 </table>

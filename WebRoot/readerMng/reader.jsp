@@ -87,7 +87,7 @@
 									    <td style="padding:5px;">&nbsp;${reader.tel }</td>
 									    <td style="padding:5px;">&nbsp;${reader.email }</td>
 									
-									    <td align="center" bgcolor="#FFFFFF"><a href="javascript:void(0)" onclick="window.open('update_reader.jsp?rid=${reader.rid }&rname=${reader.rname}&rtypename=${reader.rtypename }&papertype=${reader.papertype }&paperno=${reader.paperno }&tel=${reader.tel }&email=${reader.email }', 'Reader', 'width=550, height=350, top=100, left=350')">修改</a></td>
+									    <td align="center" bgcolor="#FFFFFF"><a href="javascript:void(0)" onclick="window.open('readerMng/update_reader.jsp?rid=${reader.rid }&rname=${reader.rname}&gender=${reader.gender}&vocation=${reader.vocation }&birthday=${reader.birthday }&papertype=${reader.papertype }&paperno=${reader.paperno }&tel=${reader.tel }&email=${reader.email }', 'Reader', 'width=600, height=550, top=50, left=200')">修改</a></td>
 									    <td align="center" bgcolor="#FFFFFF"><a href="javascript:void(0)" onclick="del(${reader.rid},'${reader.rname}');">删除</a></td>
 									    
 									  </tr>

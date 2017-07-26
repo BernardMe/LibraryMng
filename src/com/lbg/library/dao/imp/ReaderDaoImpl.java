@@ -90,11 +90,24 @@ public class ReaderDaoImpl extends BaseDaoImp implements ReaderDao {
 	
 	public List<ReaderType> queryAll() {
 		
-		String sql = "select * from t_readertype";
+		String sql = "select * from tb_readertype";
 		return baseQuery(ReaderType.class, sql);
 
 	}
+	
+	
+	public boolean updateReader(Reader reader) {
+		
+		String sql = "update tb_reader set rname=?,gender=?,vocation=?,birthday=?,papertype=?,paperno=?,tel=?,email=? where rid=?";
+		int i = baseUpdate(sql, reader.getRname(),reader.getGender(),reader.getVocation(),reader.getBirthday(),reader.getPapertype(),reader.getPaperno(),reader.getTel(),reader.getEmail(),reader.getRid());
+		if(i>0){
+			return true;
+		}else{
+			return false;
+		}
+	}
 
+	
 	/**
 	 * 读者借阅检查实体
 	 * @return list
@@ -110,6 +123,5 @@ public class ReaderDaoImpl extends BaseDaoImp implements ReaderDao {
 		//返回查询结果集
 		return baseQuery(R4Borrow.class, sql, rid);
 	}
-
 
 }

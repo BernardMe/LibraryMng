@@ -83,7 +83,13 @@ public interface ReaderDao {
 	 */
 	public List<ReaderType> queryAll();
 
-
+	/**
+	 * 更改读者档案信息
+	 * @param reader
+	 * @return
+	 */
+	public boolean updateReader(Reader reader);
+	
 	/**
 	 * 读者借阅检查实体
 	 * @return list

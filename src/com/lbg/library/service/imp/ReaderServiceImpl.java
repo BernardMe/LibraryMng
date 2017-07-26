@@ -68,6 +68,12 @@ public class ReaderServiceImpl extends BaseDaoImp implements ReaderService {
 	public List<ReaderType> queryAll() {
 		return dao.queryAll();
 	}
+	
+
+	public boolean updateReader(Reader reader) {
+		return dao.updateReader(reader);
+	}
+
 
 	/**
 	 * 读者借阅检查实体
@@ -78,8 +84,6 @@ public class ReaderServiceImpl extends BaseDaoImp implements ReaderService {
 	public List<R4Borrow> getReaderInfo4Borrow(int rid) {
 		return dao.getReaderInfo4Borrow(rid);
 	}
-
-
 
 
 }

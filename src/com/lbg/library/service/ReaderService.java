@@ -34,6 +34,8 @@ public interface ReaderService {
 	public boolean addReader(Reader reader);
 	
 	public List<ReaderType> queryAll();
+	
+	public boolean updateReader(Reader reader);
 
 	/**
 	 * 读者借阅检查实体
