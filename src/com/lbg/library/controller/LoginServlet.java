@@ -1,20 +1,25 @@
 package com.lbg.library.controller;
 
-import com.lbg.library.service.ManagerService;
-import com.lbg.library.service.imp.ManagerServiceImp;
-
+import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.List;
+
+import com.lbg.library.entity.LibManager;
+import com.lbg.library.entity.Purview;
+import com.lbg.library.service.LibManagerService;
+import com.lbg.library.service.PurviewService;
+import com.lbg.library.service.imp.LibManagerServiceImpl;
+import com.lbg.library.service.imp.PurviewServiceImpl;
 
 /**
  * 登录Servlet
  * 2017/7/13.
  */
 public class LoginServlet extends BaseServlet {
-
+	private LibManagerService lms=new LibManagerServiceImpl();
+	private PurviewService ps=new PurviewServiceImpl();
     /*@Override
     protected void service(HttpServletRequest req, HttpServletResponse rsp) throws ServletException, IOException {
         //获取req中的方法名 m
@@ -49,32 +54,20 @@ public class LoginServlet extends BaseServlet {
 
         //获取信息 用户名/密码/角色
 
-        String uname = req.getParameter("uname");
-        String upwd = req.getParameter("upwd");
-        String role = req.getParameter("role");
-
-        System.out.println("LoginServlet.service  --->" + uname +"@"+ role);
-
-        List<?> list = null;
-        //判断角色
-        if ("admin".equals(role)){
-            ManagerService service = new ManagerServiceImp();
-
-            list = service.query4Login(uname, upwd);
-
-        } else if("student".equals(role)) {
-
-        } else {
-
-        }
+        String uname = req.getParameter("mname");
+        String upwd = req.getParameter("mpwd");
+        List<LibManager> list = lms.query4Login(uname, upwd);
         //继续登录
         if(list.size() == 0) {
-            req.getSession().setAttribute("error", "用户名 密码错误");
+            req.getSession().setAttribute("error", "用户名或密码错误，请重新登陆");
             rsp.sendRedirect("login.jsp");
         } else {
             req.getSession().setAttribute("user", list.get(0));
-            req.getSession().setAttribute("role", role);
-            rsp.sendRedirect("index.jsp");
+            int mid=list.get(0).getMid();
+            List<Purview> listPur= ps.queryByMid(mid);
+//            System.out.println(listPur.get(0));
+            req.getSession().setAttribute("pur", listPur.get(0));
+            rsp.sendRedirect("mainNav.jsp");
         }
     }
 
