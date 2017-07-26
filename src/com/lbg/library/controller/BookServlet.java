@@ -216,6 +216,26 @@ public class BookServlet extends BaseServlet {
 			resp.getWriter().print("fail");
 		}
 	}
+	/**
+	 * 查看所有的图书信息模糊查询
+	 * @param req
+	 * @param resp
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	public void queryAll4sys(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+		String page = req.getParameter("page");
+		PageUtil<BookInfo> pu = new PageUtil<>(page, 15, bs.countBookInfo());
+		String bookname = req.getParameter("bookname");
+		if(bookname == null || bookname.trim().length() == 0){
+			bs.queryAllBook4Sys(pu);
+		}else{
+			bs.queryByName(bookname, pu);
+		}
+		req.setAttribute("pu", pu);
+		req.getRequestDispatcher("sysQuery/bookQuery.jsp").forward(req, resp);
+	}
+	
 	/*************************国际图书编  *******************************************/
 	/**
 	 * 对国际图书出版社的查询

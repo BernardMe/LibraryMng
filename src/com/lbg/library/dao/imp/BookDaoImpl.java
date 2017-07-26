@@ -82,6 +82,25 @@ public class BookDaoImpl extends BaseDaoImp implements BookDao {
 		String sql = "update tb_bookinfo set bookname=?,typeid=?,isbn=?,shelfid=? where bookid = ? ";
 		return baseUpdate(sql, bookname,typeid,isbn,shelfid,bookid);
 	}
+	
+	@Override
+	public void queryAllBook4Sys(PageUtil<BookInfo> pu) {
+		String sql = "select bi.bookid,bi.bookname,bi.typeid,bi.shelfid,bi.isbn,bt.typename,s.shelfname,p.pubname from tb_bookinfo bi,tb_booktype bt,tb_publishing p,tb_shelf s where bi.typeid = bt.typeid and bi.isbn = p.isbn and bi.shelfid = s.shelfid limit ?,? ";
+		List<BookInfo> list = baseQuery(BookInfo.class, sql, pu.getStart(),pu.getSize());
+		pu.setList(list);
+	}
+
+	@Override
+	public void queryByName(String bookname, PageUtil<BookInfo> pu) {
+		String sql = "select bi.bookid,bi.bookname,bi.typeid,bi.shelfid,bi.isbn,bt.typename,s.shelfname,p.pubname from tb_bookinfo bi,tb_booktype bt,tb_publishing p,tb_shelf s where bi.typeid = bt.typeid and bi.isbn = p.isbn and bi.shelfid = s.shelfid and bi.bookname like ? limit ?,?";
+		List<BookInfo> list = baseQuery(BookInfo.class, sql, "%"+bookname+"%",pu.getStart(),pu.getSize());
+		pu.setList(list);
+	}
+	
+	
+	
+	
+	
 
 	/********************* 国际图书编号 **************************************/
 
@@ -90,10 +109,5 @@ public class BookDaoImpl extends BaseDaoImp implements BookDao {
 		String sql = "select * from tb_publishing";
 		return baseQuery(BookIsbn.class, sql);
 	}
-
-
 	
-
-	
-
 }

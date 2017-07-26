@@ -70,11 +70,24 @@ public class BookServiceImpl implements BookService {
 	public int updateBookInfo(int bookid, String bookname, int typeid, String isbn, int shelfid) {
 		return dao.updateBookInfo(bookid, bookname, typeid, isbn, shelfid);
 	}
+	
+	@Override
+	public void queryAllBook4Sys(PageUtil<BookInfo> pu) {
+		dao.queryAllBook4Sys(pu);
+		
+	}
+
+	@Override
+	public void queryByName(String bookname, PageUtil<BookInfo> pu) {
+		dao.queryByName(bookname, pu);
+	}
+
 /*****************图书isbn*******************************/
 	@Override
 	public List<BookIsbn> queryAllIsbn() {
 		return dao.queryAllIsbn();
 	}
+
 
 	
 

@@ -69,6 +69,18 @@ public interface BookService {
 	 * @return
 	 */
 	int deleteBook(int bookid);
+	/**
+	 * 查看所有的图书
+	 * @param pu
+	 */
+	void queryAllBook4Sys(PageUtil<BookInfo> pu);
+    /**
+     * 根据书名模糊查询图书信息
+     * @param bookname
+     * @param pu
+     */
+	void queryByName(String bookname,PageUtil<BookInfo> pu);
+	
 	/*******************国际图书编号********************************/
 	/**
 	 * 查询所有的出版社

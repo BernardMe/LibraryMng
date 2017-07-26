@@ -1,8 +1,10 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
-
 <head>
     <title>图书馆管理系统</title>
-    <link href="../css/style.css" rel="stylesheet">
+    <base href="${applicationScope.basePath}">
+    <link href="css/style.css" rel="stylesheet">
 </head>
 <body onLoad="clockon(bgclock)">
 
@@ -20,31 +22,25 @@
                             </tr>
                             <tr>
                                 <td align="center" valign="top">
-                                    <form action="" method="post" name="form1">
+                                    <form action="book.action"  name="form1" >
+                                    <input type="hidden" name= "page" value= "1" />
+                                    <input type="hidden" name = "m" value = "queryAll4sys" />
                                         <table width="98%" height="38" border="0" cellpadding="0" cellspacing="0"
                                                bgcolor="#E3F4F7" class="tableBorder_gray">
                                             <tr>
                                                 <td align="center" bgcolor="#F9D16B">
 
-                                                    &nbsp;<img src="../Images/search.gif" width="45" height="28"></td>
-                                                <td bgcolor="#F9D16B">请选择查询依据：
-                                                    <select name="f" class="wenbenkuang" id="f">
-                                                        <option value="barcode">条形码</option>
-                                                        <option value="typename">类别</option>
-                                                        <option value="bookname" selected>书名</option>
-                                                        <option value="author">作者</option>
-                                                        <option value="publishing">出版社</option>
-                                                        <option value="bookcasename">书架</option>
-                                                    </select>
-                                                    <input name="key" type="text" id="key" size="50">
+                                                    &nbsp;<img src="Images/search.gif" width="45" height="28"></td>
+                                                <td bgcolor="#F9D16B">查询依据：
+                                                    <span>书名</span>
+                                                    <input name="bookname" type="text" id="key" size="50">
                                                     <input name="Submit232" type="submit" class="right-button02"
                                                            value="查询"/></td>
                                             </tr>
                                         </table>
 
                                         <table width="98%" border="1" cellpadding="0" cellspacing="0"
-                                               bordercolor="#FFFFFF" bordercolordark="#F6B83B"
-                                               bordercolorlight="#FFFFFF">
+                                               bordercolor="#FFFFFF" bordercolordark="#F6B83B">
                                             <tr align="center" bgcolor="#e3F4F7">
                                                 <td width="17%" bgcolor="#F9D16B">条形码</td>
                                                 <td width="31%" bgcolor="#F9D16B">图书名称</td>
@@ -52,34 +48,16 @@
                                                 <td width="19%" bgcolor="#F9D16B">出版社</td>
                                                 <td width="15%" bgcolor="#F9D16B">书架</td>
                                             </tr>
-
+                                            <c:forEach items="${pu.list}" var = "list">
                                             <tr>
-                                                <td style="padding:5px;">&nbsp;9787302047230</td>
-                                                <td style="padding:5px;"><a href="book.do?action=bookDetail&ID=1">Java学习指南</a>
+                                                <td style="padding:5px;">&nbsp;${list.bookid}</td>
+                                                <td style="padding:5px;">${list.bookname}
                                                 </td>
-                                                <td style="padding:5px;">&nbsp;计算机类</td>
-                                                <td style="padding:5px;">&nbsp;电子工业出版社</td>
-                                                <td style="padding:5px;">&nbsp;A架</td>
+                                                <td style="padding:5px;">&nbsp;${list.typename}</td>
+                                                <td style="padding:5px;">&nbsp;${list.pubname}</td>
+                                                <td style="padding:5px;">&nbsp;${list.shelfname}</td>
                                             </tr>
-
-                                            <tr>
-                                                <td style="padding:5px;">&nbsp;001</td>
-                                                <td style="padding:5px;"><a
-                                                        href="book.do?action=bookDetail&ID=6">建筑测试</a></td>
-                                                <td style="padding:5px;">&nbsp;建筑类</td>
-                                                <td style="padding:5px;">&nbsp;电子工业出版社</td>
-                                                <td style="padding:5px;">&nbsp;B架</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td style="padding:5px;">&nbsp;9787115157690</td>
-                                                <td style="padding:5px;"><a
-                                                        href="book.do?action=bookDetail&ID=3">JSP啊</a></td>
-                                                <td style="padding:5px;">&nbsp;计算机类</td>
-                                                <td style="padding:5px;">&nbsp;清华大学出版社</td>
-                                                <td style="padding:5px;">&nbsp;A架</td>
-                                            </tr>
-
+                                            </c:forEach>
                                         </table>
                                     </form>
                                 </td>
@@ -98,12 +76,29 @@
                         <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0"
                                class="right-font08">
                             <tr>
-                                <td width="50%">共 <span class="right-text09">5</span> 页 | 第 <span
-                                        class="right-text09">1</span> 页
+                                <td width="50%">共 <span class="right-text09">${pu.totalPage}</span> 页 | 第 <span
+                                        class="right-text09">${pu.page}</span> 页
                                 </td>
-                                <td width="49%" align="right">[<a href="#" class="right-font08">首页</a> | <a href="#"
-                                                                                                            class="right-font08">上一页</a>
-                                    | <a href="#" class="right-font08">下一页</a> | <a href="#" class="right-font08">末页</a>]
+                                <td width="49%" align="right">[<a href="book.action?m=queryAll4sys&page=1" class="right-font08">首页</a> | 
+                                
+                                 <c:choose>
+                                <c:when test="${pu.hasPrevious}">
+                                     <a href="book.action?m=queryAll4sys&page=${pu.prevPage}" class="right-font08">上一页</a>|
+                                </c:when>
+                                <c:otherwise>
+                                    <font color = "gray">上一页</font>
+                                </c:otherwise>
+                                </c:choose>
+                                    | 
+                                     <c:choose>
+                                <c:when test="${pu.hasNext}">
+                                     <a href="book.action?m=queryAll4sys&page=${pu.nextPage}" class="right-font08">下一页</a>|
+                                </c:when>
+                                <c:otherwise>
+                                    <font color = "gray">下一页</font>
+                                </c:otherwise>
+                                </c:choose> 
+                                    <a href="book.action?m=queryAll4sys&page=${pu.last}" class="right-font08">末页</a>]
                                     转至：
                                 </td>
                                 <td width="1%">

@@ -106,11 +106,11 @@
                                 </c:otherwise>
                                 </c:choose>
                                      <c:choose>
-                                <c:when test="${pu.hasPrevious}">
-                                     <a href="book.action?queryAllBook&page=${pu.prevPage}" class="right-font08">上一页</a>|
+                                <c:when test="${pu.hasNext}">
+                                     <a href="book.action?queryAllBook&page=${pu.nextPage}" class="right-font08">下一页</a>|
                                 </c:when>
                                 <c:otherwise>
-                                    <font color = "gray">上一页</font>
+                                    <font color = "gray">下一页</font>
                                 </c:otherwise>
                                 </c:choose>
                                     <a href="book.action?m=queryAllBook&page=${pu.last}" class="right-font08">末页</a>
