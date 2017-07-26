@@ -73,7 +73,7 @@
                 if (data != "null"){
                     data = JSON.parse(data);
 
-                    //清空表格体c1
+                    //清空表格体
                     $("#tbody").html('');
                     //拼tr*td
                     for(var i=0; i<data.length; i++){
