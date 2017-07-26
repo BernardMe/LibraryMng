@@ -70,16 +70,18 @@
             }
 
             $.get("borrow.action", {"m": "getBooks4Borrow", "bookname": bookname}, function (data) {
-                data = JSON.parse(data);
+                if (data != "null"){
+                    data = JSON.parse(data);
 
-                //清空表格体c1
-                $("#tbody").html('');
-                //拼tr*td
-                for(var i=0; i<data.length; i++){
-                    var tdstr = '<tr align="center" bgcolor="#F9D16B"><td height="25">'+data[i].bookname+'</td><td>'+data[i].borrowtm
-                        +'</td><td>'+data[i].limitbacktm+'</td><td>'+data[i].isbn+'</td><td>'+data[i].shelfid+'</td><td colspan="2">'
-                        +data[i].price+'</td><td align="center"><input type="checkbox" name="info" value="'+data[i].bookid+'" ></td></tr>';
-                    $("#tbody").append(tdstr);
+                    //清空表格体c1
+                    $("#tbody").html('');
+                    //拼tr*td
+                    for(var i=0; i<data.length; i++){
+                        var tdstr = '<tr align="center" bgcolor="#F9D16B"><td height="25">'+data[i].bookname+'</td><td>'+data[i].borrowtm
+                            +'</td><td>'+data[i].limitbacktm+'</td><td>'+data[i].isbn+'</td><td>'+data[i].shelfid+'</td><td colspan="2">'
+                            +data[i].price+'</td><td align="center"><input type="checkbox" name="info" value="'+data[i].bookid+'" ></td></tr>';
+                        $("#tbody").append(tdstr);
+                    }
                 }
             });
         }
