@@ -5,12 +5,19 @@
 <base href="${applicationScope.basePath}">
 <title>图书馆管理系统</title>
 <link href="css/style.css" rel="stylesheet">
+<style>
+   .greenSpan{
+      color : green;
+   }
+   .redSpan{
+      color : red;
+   }
+</style>
 </head>
 <script src = "js/jquery.min.js"></script>
 <script language="javascript">
 //获取书的类型
 $(function(){
-	alert('${param.isbn}');
 	$.getJSON("book.action",{"m":"queryAllType"},function(data){
 		for(var i = 0; i < data.length;i++){
 			if(data[i].typeid == "${param.typeid}"){
@@ -32,7 +39,7 @@ $(function(){
 		}
 	});
 	//获取书架
-	 $.getJSON("book.action",{"m":"query4shelf"},function(data){
+	 $.getJSON("shelf.action",{"m":"query4shelf"},function(data){
 		for(var i = 0; i < data.length;i++){
 		if(data[i].shelfid == "${param.shelf}"){
 			$("#bookcaseid").append(new Option(data[i].shelfname, data[i].shelfid,true,true));
@@ -41,8 +48,11 @@ $(function(){
 		  }
 		}
 	}); 
-	//给保存绑定事件
-	$("#btn").bind("click",function(){
+	
+});
+//给保存绑定事件
+function bindClick(){
+	if(checkAll()){
 		var result = window.confirm("确定修改吗？");
 		if(result){
 			var param = {"m":"updateBookInfo","bookid":"${param.bookid}","typeid":$("#typeid").val(),"shelfid":$("#shelfid").val(),
@@ -57,8 +67,60 @@ $(function(){
 				}
 			});
 		}
-	});
-});
+	}
+}
+//校验图书名
+function checkName(){
+	var bookname =$("#bookname").val();
+	if(bookname==null||bookname.trim().length==0){
+		$("#nameSpan").html("图书名称不能为空");
+		$("#nameSpan").attr("class","redSpan");
+	}else{
+		$("#nameSpan").html("ok");
+		$("#nameSpan").attr("class","greenSpan");
+	}
+}
+//校验typeid
+function checkTp(){
+	var typeid= $("#typeid").val();
+	if(typeid == -1){
+		$("#tpSpan").html("必须选择一项");
+		$("#tpSpan").attr("class","redSpan");
+	}else{
+		$("#tpSpan").html("ok");
+		$("#tpSpan").attr("class","greenSpan");
+	}
+}
+//校验isbn
+function checkIsbn(){
+	var isbn= $("#isbn").val();
+	if(isbn == -1){
+		$("#isbnSpan").html("必须选择一项");
+		$("#isbnSpan").attr("class","redSpan");
+	}else{
+		$("#isbnSpan").html("ok");
+		$("#isbnSpan").attr("class","greenSpan");
+	}
+}
+//校验书架
+function checkCase(){
+	var bookcaseid= $("#bookcaseid").val();
+	if(bookcaseid == -1){
+		$("#caseSpan").html("必须选择一项");
+		$("#caseSpan").attr("class","redSpan");
+	}else{
+		$("#caseSpan").html("ok");
+		$("#caseSpan").attr("class","greenSpan");
+	}
+}
+function checkAll(){
+	var flag = checkName()&checkCase()&checkIsbn()&checkTp();
+	if(flag){
+		return true;
+	}else{
+		return false;
+	}
+}
 
 </script>
 <body>
@@ -88,32 +150,32 @@ $(function(){
     <tr>
     <td align="left" style="padding:5px;">图书名称：</td>
     <td align="left">
-    	<input name="bookname" type="text" id="bookname" size="30" value="${param.bookname}">
+    	<input name="bookname" type="text" id="bookname" size="20" value="${param.bookname}" onblur = "checkName();">&nbsp;<span id = "nameSpan"></span>
     </tr>
     <tr>
     <td align="left" style="padding:5px;">图书类型：</td>
     <td align="left">
-    	<select name="typeid" id="typeid">
+    	<select name="typeid" id="typeid" onblur= "checkTp();">
     	  <option value="-1">请选择图书类型</option>
-    	</select>
+    	</select><span id = "tpSpan"></span>
     </tr>
     <tr>
     <td align="left" style="padding:5px;">国际图书编号：</td>
     <td align="left">
-    	<select name="isbn" id="isbn">
+    	<select name="isbn" id="isbn" onblur = "checkIsbn();">
     	  <option value="-1">请选择出版社</option>
-    	</select>
+    	</select><span id = "isbnSpan"></span>
     </tr>
     <tr>
     <td align="left" style="padding:5px;">所属书架：</td>
     <td align="left">
-    	<select name="bookcaseid" id="bookcaseid">
+    	<select name="bookcaseid" id="bookcaseid" onblur = "checkCase();">
     	   <option value="-1">请选择书架</option>
-    	</select>
+    	</select><span id = "caseSpan"></span>
     </tr>
     <tr>
       <td height="65" align="left" style="padding:5px;">&nbsp;</td>
-      <td><input type="button" name="Submit" value="保存" class="button" id = "btn" />
+      <td><input type="button" name="Submit" value="保存" class="button" id = "btn" onclick = "bindClick();"/>
         &nbsp;
     </tr>
 </table>

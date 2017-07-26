@@ -5,6 +5,14 @@
 <base href="${applicationScope.basePath}">
 <title>图书馆管理系统</title>
 <link href="css/style.css" rel="stylesheet">
+<style>
+   .greenSpan{
+      color : green;
+   }
+   .redSpan{
+      color : red;
+   }
+</style>
 </head>
 <script src = "js/jquery.min.js"></script>
 <script language="javascript">
@@ -23,12 +31,118 @@ $(function(){
 		}
 	});
 	//获取书架
-	$.getJSON("book.action",{"m":"query4shelf"},function(data){
+	$.getJSON("shelf.action",{"m":"query4shelf"},function(data){
 		for(var i = 0; i < data.length;i++){
 			$("#bookcaseid").append(new Option(data[i].shelfname, data[i].shelfid));
 		}
 	});
 });
+//校验图书名
+	function checkName(){
+		var bookname =$("#bookname").val();
+		if(bookname==null||bookname.trim().length==0){
+			$("#nameSpan").html("图书名称不能为空");
+			$("#nameSpan").attr("class","redSpan");
+		}else{
+			$("#nameSpan").html("ok");
+			$("#nameSpan").attr("class","greenSpan");
+		}
+	}
+	//校验作者
+	function checkAuthor(){
+		var author =$("#author").val();
+		if(author==null||author.trim().length==0){
+			$("#AuthorSpan").html("作者不能为空");
+			$("#AuthorSpan").attr("class","redSpan");
+		}else{
+			$("#AuthorSpan").html("ok");
+			$("#AuthorSpan").attr("class","greenSpan");
+		}
+	}
+	//校验翻译者
+	function checkTr(){
+		var translator =$("#translator").val();
+		if(translator==null||translator.trim().length==0){
+			$("#TrSpan").html("翻译者不能为空");
+			$("#TrSpan").attr("class","redSpan");
+		}else{
+			$("#TrSpan").html("ok");
+			$("#TrSpan").attr("class","greenSpan");
+		}
+	}
+	//校验价格
+	 function checkPrice(){
+		var price = $("#price").val();
+		var regex = /^\d{1,6}$/;
+		if(price == null || price.trim().length == 0){
+			$("#priceSpan").html("价格不能为空");
+			$("#priceSpan").attr("class","redSpan")
+		}else if(regex.test(price)){
+			$("#priceSpan").html("ok");
+			$("#priceSpan").attr("class","greenSpan");
+		}else{
+			$("#priceSpan").html("价格必须为数字");
+			$("#priceSpan").attr("class","redSpan");
+		}
+	}
+	//校验页数
+	 function checkPage(){
+		var page = $("#page").val();
+		var regex = /^\d{1,6}$/;
+		if(page == null || page.trim().length == 0){
+			$("#pageSpan").html("页数不能为空");
+			$("#pageSpan").attr("class","redSpan");
+		}else if(regex.test(price)){
+			$("#pageSpan").html("ok");
+			$("#pageSpan").attr("class","greenSpan")
+		}else{
+			$("#pageSpan").html("页数必须为数字");
+			$("#pageSpan").attr("class","redSpan");
+		}
+	}
+	//校验typeid
+	function checkTp(){
+		var typeid= $("#typeid").val();
+		if(typeid == -1){
+			$("#tpSpan").html("必须选择一项");
+			$("#tpSpan").attr("class","redSpan");
+		}else{
+			$("#tpSpan").html("ok");
+			$("#tpSpan").attr("class","greenSpan");
+		}
+	}
+	//校验isbn
+	function checkIsbn(){
+		var isbn= $("#isbn").val();
+		if(isbn == -1){
+			$("#isbnSpan").html("必须选择一项");
+			$("#isbnSpan").attr("class","redSpan");
+		}else{
+			$("#isbnSpan").html("ok");
+			$("#isbnSpan").attr("class","greenSpan");
+		}
+	}
+	//校验书架
+	function checkCase(){
+		var bookcaseid= $("#bookcaseid").val();
+		if(bookcaseid == -1){
+			$("#caseSpan").html("必须选择一项");
+			$("#caseSpan").attr("class","redSpan");
+		}else{
+			$("#caseSpan").html("ok");
+			$("#caseSpan").attr("class","greenSpan");
+		}
+	}
+	function checkAll(){
+		var  flag1 = checkName()&checkCase()&checkIsbn();
+		var flag2 = checkTp()&checkPage()&checkTr()&checkAuthor();
+		if(flag1&flag2){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
 
 </script>
 <body onLoad="clockon(bgclock)">
@@ -51,62 +165,57 @@ $(function(){
 <input type="hidden" name="m" value = "addBook" />
   <table width="47%"  border="0" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF" bordercolordark="#D2E3E6" bordercolorlight="#FFFFFF">
   <tr align="center">
-    <td width="27%" align="left" style="padding:5px;">条形码：</td>
-    <td width="73%" align="left">
-      <input name="barcode" type="text" id="barcode" size="30">    
-    </td>
-    </tr>
     <tr>
     <td align="left" style="padding:5px;">图书名称：</td>
     <td align="left">
-    	<input name="bookname" type="text" id="bookname" size="30">
+    	<input name="bookname" type="text" id="bookname" size="20" onblur = "checkName();">&nbsp;<span id = "nameSpan"></span>
     </tr>
     <tr>
     <td align="left" style="padding:5px;">图书类型：</td>
     <td align="left">
-    	<select name="typeid" id="typeid">
+    	<select name="typeid" id="typeid" onblur = "checkTp();">
     	  <option value="-1">请选择图书类型</option>
-    	</select>
+    	</select><span id = "tpSpan"></span>
     </tr>
     <tr>
     <td align="left" style="padding:5px;">图书作者：</td>
     <td align="left">
-    	<input name="author" type="text" id="author" size="30">
+    	<input name="author" type="text" id="author" size="20" onblur = "checkAuthor();">&nbsp;<span id = "AuthorSpan"></span>
     </tr>
     <tr>
     <td align="left" style="padding:5px;">翻译者：</td>
     <td align="left">
-    	<input name="translator" type="text" id="translator" size="30">
+    	<input name="translator" type="text" id="translator" size="20" onblur = "checkTr();">&nbsp;<span id = "TrSpan"></span>
     </tr>
     <tr>
     <td align="left" style="padding:5px;">国际图书编号：</td>
     <td align="left">
-    	<select name="isbn" id="isbn">
+    	<select name="isbn" id="isbn" onblur = "checkIsbn();">
     	  <option value="-1">请选择出版社</option>
-    	</select>
+    	</select><span id = "isbnSpan"></span>
     </tr>
     
     <tr>
     <td align="left" style="padding:5px;">图书价格：</td>
     <td align="left">
-    	<input name="price" type="text" id="price" size="30">
+    	<input name="price" type="text" id="price" size="20" onblur = "checkPrice();">&nbsp;<span id = "priceSpan"></span>
     </tr>
     <tr>
     <td align="left" style="padding:5px;">总页数：</td>
     <td align="left">
-    	<input name="page" type="text" id="page" size="30">
+    	<input name="page" type="text" id="page" size="20" onblur = "checkPage();">&nbsp;<span id = "pageSpan"></span>
     </tr>
     <tr>
     <td align="left" style="padding:5px;">所属书架：</td>
     <td align="left">
-    	<select name="bookcaseid" id="bookcaseid">
+    	<select name="bookcaseid" id="bookcaseid" onblur = "checkCase();">
     	   <option value="-1">请选择书架</option>
-    	</select>
+    	</select><span id= "caseSpan"></span>
     </tr>
     <tr>
     <td align="left" style="padding:5px;">上架时间：</td>
     <td align="left">
-    	<input name="inTime" type="date" id="inTime" size="30">
+    	<input name="inTime" type="date" id="inTime" size="20">&nbsp;<span id = "timeSpan"></span>
     </tr>
     
     <tr>
@@ -121,12 +230,12 @@ $(function(){
     <tr>
     <td align="left" style="padding:5px;">操作员：</td>
     <td align="left">
-    	<input name="operator" type="text" id="operator" size="30">
+    	<input name="operator" type="text" id="operator" size="20" onblur = "checkOp();">&nbsp;<span id = "opSpan"></span>
     </tr>
     
     <tr>
       <td height="65" align="left" style="padding:5px;">&nbsp;</td>
-      <td><input type="submit" name="Submit" value="保存" class="button" />
+      <td><input type="submit" name="Submit" value="保存" class="button" onclick = " return checkAll();" />
         &nbsp;
         <input type="reset" name="Submit" value="取消" class="button"/></td>
     </tr>
