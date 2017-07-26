@@ -1,7 +1,9 @@
 package com.lbg.library.service;
 
+import com.lbg.library.entity.Alert4Return;
 import com.lbg.library.entity.B4Borrow;
 import com.lbg.library.entity.Borrowed;
+import com.lbg.library.util.PageUtil;
 
 import java.util.List;
 
@@ -40,4 +42,17 @@ public interface BorrowService {
      * @return
      */
     int saveReturn(int rid, String[] swids, String operator);
+
+    /**
+     * zmw
+     * 带分页的借阅到期提醒列表
+     * @param pageutil
+     */
+    void getAlert4ReturnList(PageUtil<Alert4Return> pageutil);
+
+    /**
+     * zmw
+     * @return
+     */
+    int queryAlert4ReturnCount();
 }

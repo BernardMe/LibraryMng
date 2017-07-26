@@ -1,7 +1,9 @@
 package com.lbg.library.dao;
 
+import com.lbg.library.entity.Alert4Return;
 import com.lbg.library.entity.B4Borrow;
 import com.lbg.library.entity.Borrowed;
+import com.lbg.library.util.PageUtil;
 
 import java.util.List;
 
@@ -48,4 +50,17 @@ public interface BorrowDao {
      * @param swid rid operator
      */
     int saveReturn(int swid, int rid, String operator);
+
+    /**
+     * 带分页的借阅到期提醒列表
+     * @param pageutil
+     */
+    void getAlert4ReturnList(PageUtil<Alert4Return> pageutil);
+
+
+    /**
+     * 获取读者总数目
+     * @return 读者总数
+     */
+    public int queryAlert4ReturnCount();
 }

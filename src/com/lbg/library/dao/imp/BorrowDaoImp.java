@@ -1,8 +1,10 @@
 package com.lbg.library.dao.imp;
 
 import com.lbg.library.dao.BorrowDao;
+import com.lbg.library.entity.Alert4Return;
 import com.lbg.library.entity.B4Borrow;
 import com.lbg.library.entity.Borrowed;
+import com.lbg.library.util.PageUtil;
 
 import java.util.List;
 
@@ -86,5 +88,18 @@ public class BorrowDaoImp extends BaseDaoImp implements BorrowDao {
         String sql = "INSERT INTO tb_return VALUES (?, ?, bookidBySwid(swid), CURDATE(), 'java1234')";
         //返回查询结果集
         return baseUpdate(sql, swid, rid);
+    }
+
+    @Override
+    public void getAlert4ReturnList(PageUtil<Alert4Return> pageutil) {
+        String sql = "select b.bookid,b.bookname,r.rid,r.rname,bo.borrowtime,bo.limitbacktime from tb_bookinfo b,tb_reader r,tb_borrow bo where b.bookid=bo.bookid and r.rid=bo.rid and bo.ifback=0 limit ?,?";
+        pageutil.setList(baseQuery(Alert4Return.class, sql,pageutil.getStart(),pageutil.getSize()));
+
+    }
+
+    @Override
+    public int queryAlert4ReturnCount() {
+        String sql = "select count(*) from tb_bookinfo b,tb_reader r,tb_borrow bo where b.bookid=bo.bookid and r.rid=bo.rid and bo.ifback=0";
+        return queryCount(sql);
     }
 }

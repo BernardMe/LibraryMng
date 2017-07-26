@@ -1,6 +1,7 @@
 package com.lbg.library.controller;
 
 import com.google.gson.Gson;
+import com.lbg.library.entity.Alert4Return;
 import com.lbg.library.entity.B4Borrow;
 import com.lbg.library.entity.Borrowed;
 import com.lbg.library.entity.R4Borrow;
@@ -8,6 +9,7 @@ import com.lbg.library.service.BorrowService;
 import com.lbg.library.service.ReaderService;
 import com.lbg.library.service.imp.BorrowServiceImp;
 import com.lbg.library.service.imp.ReaderServiceImpl;
+import com.lbg.library.util.PageUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -143,5 +145,20 @@ public class BorrowServlet extends BaseServlet {
         } else {
             rsp.getWriter().print("-1");
         }
+    }
+
+    /**
+     * author zmw
+     * 借阅到期提醒的列表显示
+     */
+    public void borrowTimeRemindList(HttpServletRequest req, HttpServletResponse rsp) throws ServletException, IOException{
+
+        String page = req.getParameter("page");
+        PageUtil<Alert4Return> pu = new PageUtil<Alert4Return>(page,10,bs.queryAlert4ReturnCount());
+        bs.getAlert4ReturnList(pu);
+        req.setAttribute("pu", pu);
+
+        req.getRequestDispatcher("/sysQuery/bremind.jsp").forward(req, rsp);
+        return;
     }
 }

@@ -2,9 +2,11 @@ package com.lbg.library.service.imp;
 
 import com.lbg.library.dao.BorrowDao;
 import com.lbg.library.dao.imp.BorrowDaoImp;
+import com.lbg.library.entity.Alert4Return;
 import com.lbg.library.entity.B4Borrow;
 import com.lbg.library.entity.Borrowed;
 import com.lbg.library.service.BorrowService;
+import com.lbg.library.util.PageUtil;
 
 import java.util.List;
 
@@ -88,4 +90,13 @@ public class BorrowServiceImp implements BorrowService {
         return rc;
     }
 
+    @Override
+    public void getAlert4ReturnList(PageUtil<Alert4Return> pageutil) {
+        dao.getAlert4ReturnList(pageutil);
+    }
+
+    @Override
+    public int queryAlert4ReturnCount() {
+        return dao.queryAlert4ReturnCount();
+    }
 }
