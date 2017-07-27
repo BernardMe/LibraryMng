@@ -14,12 +14,15 @@
 	   var flag=window.confirm("确定要删除吗？");
 	   if(flag){
 		   $.post("shelf.action",{"m":"deleteShelf","shelfid":shelfid},function(data){
-			   if(data){
+			   if(data=="success"){
 				   alert("删除成功");
                    window.location="shelf.action?m=queryAllShelf&page=${pu.page}";
-			   }else{
+			   }else if(data=="fail"){
 				   alert("删除失败");
                    window.location="shelf.action?m=queryAllShelf&page=${pu.page}";
+			   }else{
+				   alert("该书架上有书，不能删除该书架");
+				   window.location="shelf.action?m=queryAllShelf&page=${pu.page}";
 			   }
 		   })
 	   }

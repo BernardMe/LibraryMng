@@ -45,5 +45,10 @@ public class BookShelfServiceImpl implements BookShelfService {
 		// TODO Auto-generated method stub
 		return dao.upadteShelfNamd(shelfid, shelfname);
 	}
+	@Override
+	public int queryShelfCount(int shelfid) {
+		// TODO Auto-generated method stub
+		return dao.queryShelfCount(shelfid);
+	}
 
 }

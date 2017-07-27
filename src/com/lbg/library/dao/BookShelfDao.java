@@ -35,4 +35,8 @@ public interface BookShelfDao {
 	 * 修改数据名称
 	 */
 	int upadteShelfNamd(int shelfid,String shelfname);
+	/**
+	 * 查询书架书的数量
+	 */
+	int queryShelfCount(int shelfid);
 }

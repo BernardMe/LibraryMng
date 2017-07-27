@@ -78,12 +78,18 @@ public class BookShelfServlet extends BaseServlet {
 			throws ServletException, IOException {
 //		String shelfname=req.getParameter("shelfname");
 		int shelfid=Integer.parseInt(req.getParameter("shelfid"));
-		int del = bss.deleteShelf(shelfid);
-		if(del>0){
-			rsp.getWriter().print("success");
+		int query = bss.queryShelfCount(shelfid);
+		if(query>0){
+			rsp.getWriter().print("have");
 		}else{
-			rsp.getWriter().print("fail");
+			int del = bss.deleteShelf(shelfid);
+			if(del>0){
+				rsp.getWriter().print("success");
+			}else{
+				rsp.getWriter().print("fail");
+			}	
 		}
+		
 	}
 	/**
 	 * 更改书架名

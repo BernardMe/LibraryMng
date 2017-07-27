@@ -51,4 +51,10 @@ public class BookShelfDaoImpl extends BaseDaoImp implements BookShelfDao {
 		return baseUpdate(sql, shelfname,shelfid);
 	}
 
+	@Override
+	public int queryShelfCount(int shelfid) {
+		String sql="select count(*) from tb_bookinfo where shelfid=?";
+		return queryCount(sql, shelfid);
+	}
+
 }
