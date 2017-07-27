@@ -14,7 +14,7 @@ public class SysQueryDaoImp extends BaseDaoImp implements SysQueryDao {
         //定义SQL
         String sql = "SELECT b.bookid, b.bookname, t.rid, r.rname, t.borrowtime, t.limitbacktime, t.ifback " +
                 " FROM (tb_bookinfo b RIGHT JOIN tb_borrow t ON b.bookid = t.bookid) LEFT JOIN tb_reader r ON t.rid = r.rid" +
-                " WHERE  bookname like '%"+ bookname +"%'";
+                " WHERE  bookname like '%"+ bookname +"%' ORDER BY t.borrowtime ASC";
 
         //返回查询结果集
         return baseQuery(BQuery.class, sql);

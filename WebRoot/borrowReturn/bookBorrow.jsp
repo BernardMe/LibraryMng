@@ -52,7 +52,7 @@
                 data = JSON.parse(data);
 
                 $("#rname").val(data[0].rname);
-                $("#gender").val(data[0].gender);
+                $("#gender").val(data[0].gender == 0 ? "女": "男");
                 $("#rtypename").val(data[0].rtypename);
                 $("#papertype").val(data[0].papertype);
                 $("#paperno").val(data[0].paperno);

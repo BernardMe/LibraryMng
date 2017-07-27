@@ -29,6 +29,7 @@ public class LibManagerServlet extends BaseServlet {
 			List<LibManager> list = lms.queryByMname(mname);
 			int mid=list.get(0).getMid();
 //			System.out.println(mid);
+			//新增管理员赋予权限操作
 			int i = ps.addPurview(mid);
 //			System.out.println(i);
 			if(i>0){
@@ -64,6 +65,7 @@ public class LibManagerServlet extends BaseServlet {
 		String mname=req.getParameter("mname").toLowerCase();
 		List<LibManager> list = lms.queryByMname(mname);
 		int mid=list.get(0).getMid();
+		//先删除权限表中记录
 		int del = ps.deleteManagerPur(mid);
 		if(del>0){
 			int man = lms.deleteManager(mid);

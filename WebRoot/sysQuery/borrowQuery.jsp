@@ -109,7 +109,7 @@
                                             <td style="padding:5px;">${bq.rname}</td>
                                             <td style="padding:5px;">${bq.borrowtime}</td>
                                             <td style="padding:5px;">${bq.limitbacktime}</td>
-                                            <td align="center" style="padding:5px;">${bq.ifback}</td>
+                                            <td align="center" style="padding:5px;">${bq.ifback == 0 ? "未归还": "已归还"}</td>
                                         </tr>
                                         </c:forEach>
 
