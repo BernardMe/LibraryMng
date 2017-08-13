@@ -20,47 +20,47 @@ public interface ReaderDao {
 	 * 带分页功能的查询读者类型
 	 * @param pageutil
 	 */
-	public void getReaderTypeList(PageUtil<ReaderType> pageutil);
+	void getReaderTypeList(PageUtil<ReaderType> pageutil);
 	
 	/**
 	 * 获取读者类型总数目
 	 * @return 读者类型总数
 	 */
-	public int queryReaderTypeCount();
+	int queryReaderTypeCount();
 	
 	/**
 	 * 增加新的读者类型
 	 * @param readertype
 	 */
-	public boolean addReaderType(ReaderType readertype);
+	boolean addReaderType(ReaderType readertype);
 	
 	/**
 	 * 根据读者类型id删除相应的读者类型
 	 * @param rtypeid
 	 * @return 
 	 */
-	public boolean deleteReaderTypeByID(byte rtypeid);
+	boolean deleteReaderTypeByID(byte rtypeid);
 	
 	/**
 	 * 更改相应的读者类型
-	 * @param rtypeid
+	 * @param readertype
 	 * @return
 	 */	
-	public boolean updateReaderType(ReaderType readertype);
+	boolean updateReaderType(ReaderType readertype);
 	
 	
 	/**
 	 * 带分页功能的查询读者档案
 	 * @param pageutil
 	 */
-	public void getReaderList(PageUtil<Reader> pageutil);
+	void getReaderList(PageUtil<Reader> pageutil);
 	
 	
 	/**
 	 * 获取读者总数目
 	 * @return 读者总数
 	 */
-	public int queryReaderCount();
+	int queryReaderCount();
 	
 	
 	/**
@@ -68,27 +68,27 @@ public interface ReaderDao {
 	 * @param rid
 	 * @return
 	 */	
-	public boolean deleteReaderByID(int rid);
+	boolean deleteReaderByID(int rid);
 	
 	/**
 	 * 增加读者
 	 * @param reader
 	 * @return
 	 */
-	public boolean addReader(Reader reader);
+	boolean addReader(Reader reader);
 	
 	/**
 	 * 查询所有的读者类型列表
 	 * @return
 	 */
-	public List<ReaderType> queryAll();
+	List<ReaderType> queryAll();
 
 	/**
 	 * 更改读者档案信息
 	 * @param reader
 	 * @return
 	 */
-	public boolean updateReader(Reader reader);
+	boolean updateReader(Reader reader);
 	
 	/**
 	 * 读者借阅检查实体

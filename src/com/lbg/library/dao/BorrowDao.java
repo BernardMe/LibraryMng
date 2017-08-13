@@ -62,5 +62,5 @@ public interface BorrowDao {
      * 获取读者总数目
      * @return 读者总数
      */
-    public int queryAlert4ReturnCount();
+    int queryAlert4ReturnCount();
 }
